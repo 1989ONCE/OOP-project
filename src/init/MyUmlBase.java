@@ -1,8 +1,9 @@
 package init;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 //  main frame initializing, including three parts: canvas, toolbar and menu
-public class UmlBase { 
+public class MyUmlBase { 
     public static void main(String[] args) { 
         /** 因為Java Swing的component不是thread-safe的,
         SwingUtilities.invokeLater()可以讓程式在Event-Dispatching Thread（EDT）上執行
@@ -11,7 +12,13 @@ public class UmlBase {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Frame(); // 初始化Frame
-            }});
+                MyFrame myFrame = new MyFrame(); // 初始化Frame
+                JOptionPane.showMessageDialog(myFrame, "Welcome to UML Editor by Susan Chen");
+                
+                myFrame.initSection(myFrame); // 初始化Canvas, Toolbar, Menu
+                myFrame.revalidate(); // 因為JOptonPane會導致畫面重繪問題，所以使用revalidate(), repaint()重新繪製畫面
+                myFrame.repaint();
+            }
+        });
     }
 }
