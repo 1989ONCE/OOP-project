@@ -2,13 +2,16 @@ package init;
 import javax.swing.*;
 
 
-public class Frame {
-    private String title = "umlEditor by Susan Chen";
-
+public class Frame extends JFrame{
+    private final String title = "umlEditor by Susan Chen";
+    private final int width = 800;
+    private final int height = 700;
+    
+    // constructor
     public Frame() {
-        JFrame frame = new JFrame(title);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 700);
-        frame.setVisible(true);
+        this.setTitle(title);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(this.width, this.height);
+        this.setVisible(true);
     }
 }

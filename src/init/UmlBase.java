@@ -9,8 +9,9 @@ public class UmlBase {
         EDT可以確保Swing component在同一個thread上建立、更新，避免thread同步的問題 **/
 
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new Frame();
+                new Frame(); // 初始化Frame
             }});
     }
 }
