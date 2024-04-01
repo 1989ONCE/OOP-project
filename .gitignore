@@ -25,3 +25,6 @@ replay_pid*
 
 # bin folder
 bin/
+
+#.DS_Store (Mac)
+.DS_Store
