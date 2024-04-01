@@ -1,10 +1,7 @@
 package menu.menuAction;
 
 import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
-import init.MyCanvas;
+import canvas.MyCanvas;
 import init.MyFrame;
 
 public class SaveAsAction implements MenuAction {

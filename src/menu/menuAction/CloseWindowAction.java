@@ -1,6 +1,6 @@
 package menu.menuAction;
+import canvas.MyCanvas;
 import init.MyFrame;
-import init.MyCanvas;
 
 public class CloseWindowAction implements MenuAction {
     @Override

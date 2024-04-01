@@ -3,20 +3,27 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import canvas.MyCanvas;
 import menu.Menu;
 import toolbar.MyToolbar;
 
 
 public class MyFrame extends JFrame{
 
+    // static variable and method
+    private static MyFrame frame;
+    public static MyFrame getFrame(){
+        return frame;
+    }
+
     // set final to prevent from being changed
     private final String title = "UML Editor by Susan Chen";
     private final int frameWidth = 800;
     private final int frameHeight = 680;
+
     private MyCanvas canvas;
     private Menu menuBar;
     private MyToolbar toolBar;
-    private static MyFrame frame;
 
     // constructor
     public MyFrame() {
@@ -48,14 +55,21 @@ public class MyFrame extends JFrame{
         frame.setJMenuBar(this.menuBar);
     }
 
+
+    // set functions
     public void setFrame(MyFrame frame){
         MyFrame.frame = frame;
     }
 
-    public static MyFrame getFrame(){
-        return frame;
+    public void setToolBar(MyToolbar toolBar){
+        this.toolBar = toolBar;
     }
 
+    public void setCanvas(MyCanvas canvas){
+        this.canvas = canvas;
+    }
+
+    // get functions
     public int getFrameWidth() {
         return frameWidth;
     }
@@ -63,14 +77,14 @@ public class MyFrame extends JFrame{
         return frameHeight;
     }
 
+    public MyToolbar getToolBar(){
+        return this.toolBar;
+    }
+
     public MyCanvas getCanvas(){
         return this.canvas;
     }
     public Menu getMenu(){
         return this.menuBar;
-    }
-
-    public MyToolbar getToolBar(){
-        return this.toolBar;
     }
 }

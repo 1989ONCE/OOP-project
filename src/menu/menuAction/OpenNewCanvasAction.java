@@ -1,6 +1,6 @@
 package menu.menuAction;
 
-import init.MyCanvas;
+import canvas.MyCanvas;
 import init.MyFrame;
 
 public class OpenNewCanvasAction implements MenuAction {
