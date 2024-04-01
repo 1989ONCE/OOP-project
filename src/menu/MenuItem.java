@@ -17,8 +17,8 @@ import menu.menuAction.RenameObjectAction;
 
 public class MenuItem extends JMenuItem implements ActionListener{
     
-    private static final Map<String, MenuAction> actions = new HashMap<>();
-    static {
+    private final Map<String, MenuAction> actions = new HashMap<>();
+    {
         actions.put("Open New Canvas", new OpenNewCanvasAction());
         actions.put("Save As...", new SaveAsAction());
         actions.put("Close Window", new CloseWindowAction());
