@@ -8,7 +8,7 @@ import javax.swing.JMenuBar;
 
 public class Menu extends JMenuBar{
     private final int menuHeight = 30;
-    private ArrayList<String> MenuOption = new ArrayList<String>(Arrays.asList("File", "Edit"));
+    private ArrayList<String> menuOption = new ArrayList<String>(Arrays.asList("File", "Edit"));
     
     private ArrayList<String> fileMenuItem = new ArrayList<String>(Arrays.asList("Open New Canvas", "Save As...", "Close Window"));
     private ArrayList<String> editMenuItem = new ArrayList<String>(Arrays.asList("Group", "UnGroup", "Rename Object"));
@@ -18,9 +18,9 @@ public class Menu extends JMenuBar{
     public Menu(int menuWidth) {
         this.setPreferredSize(new Dimension(menuWidth, menuHeight));
 
-        for (int i = 0; i < MenuOption.size(); i++) {
-            JMenu jmenu = new JMenu(MenuOption.get(i));
-            System.out.println("MenuOption.get(i): " + MenuOption.get(i));
+        for (int i = 0; i < menuOption.size(); i++) {
+            JMenu jmenu = new JMenu(menuOption.get(i));
+            System.out.println("MenuOption.get(i): " + menuOption.get(i));
             for (int j = 0; j < grandItem.get(i).size(); j++) {
                 MenuItem menuItem = new MenuItem(grandItem.get(i).get(j));
                 System.out.println("MenuOption.get(i): " + grandItem.get(i).get(j));
