@@ -1,9 +1,8 @@
 package canvas.btnAction;
 
-import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-public class CompositionAction implements MouseListener {
+public class CompositionAction implements ButtonAction {
     @Override
     public void mouseClicked(MouseEvent e) {
         // Implement the onClick method here
@@ -29,5 +28,15 @@ public class CompositionAction implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         // Implement the mouseExited method here
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 }

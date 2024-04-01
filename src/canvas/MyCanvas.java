@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import canvas.btnAction.AssociateAction;
+import canvas.btnAction.ButtonAction;
 import canvas.btnAction.CompositionAction;
 import canvas.btnAction.CreateClassAction;
 import canvas.btnAction.CreateUseCaseAction;
@@ -30,12 +30,12 @@ import canvas.btnAction.SelectAction;
 import canvas.shape.UseCaseFigure;
 
 public class MyCanvas extends JPanel {
-    private MouseListener action;
+    private ButtonAction action;
     private Object currentFigure;
     private List<Object> figures = new ArrayList<>();
     private final String defaultAction = "Select";
     private final Color canvasBgColor = Color.WHITE;
-    private final Map<String, MouseListener> functions = new HashMap<>();
+    private final Map<String, ButtonAction> functions = new HashMap<>();
     // private MyCanvas canvas = MyFrame.getFrame().getCanvas();
     {
         functions.put("Select", new SelectAction());
@@ -66,12 +66,20 @@ public class MyCanvas extends JPanel {
                 action.mouseClicked(e);
                 repaint();
             }
+            
+        });
+
+        this.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                action.mouseMoved(e);
+                repaint();
+            }
 
             @Override
             public void mouseDragged(MouseEvent e) {
                 repaint();
             }
-            
         });
     }
 
@@ -154,7 +162,7 @@ public class MyCanvas extends JPanel {
     // update action if user change the button function
     public void setAction(String btnName) {
         // polymorphism of MouseListener
-        MouseListener action = functions.get(btnName);
+        ButtonAction action = functions.get(btnName);
         this.action = action;
     }
 }

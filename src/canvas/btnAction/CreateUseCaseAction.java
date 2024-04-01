@@ -1,9 +1,8 @@
 package canvas.btnAction;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class CreateUseCaseAction implements MouseListener {
+public class CreateUseCaseAction implements ButtonAction {
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -30,5 +29,14 @@ public class CreateUseCaseAction implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         // Implement the mouseExited method here
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // Implement the mouseDragged method here
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 }

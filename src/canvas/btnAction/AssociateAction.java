@@ -1,11 +1,9 @@
 package canvas.btnAction;
 
-import java.awt.event.MouseListener;
-
 import java.awt.event.MouseEvent;
 
 
-public class AssociateAction implements MouseListener {
+public class AssociateAction implements ButtonAction {
     @Override
     public void mouseClicked(MouseEvent e) {
         // Implement the onClick method here
@@ -31,5 +29,13 @@ public class AssociateAction implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         // Implement the mouseExited method here
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 }

@@ -1,9 +1,8 @@
 package canvas.btnAction;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class CreateClassAction implements MouseListener{
+public class CreateClassAction implements ButtonAction{
     
 
     @Override
@@ -31,5 +30,17 @@ public class CreateClassAction implements MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {
         // Implement the mouseExited method here
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
     }
 }
