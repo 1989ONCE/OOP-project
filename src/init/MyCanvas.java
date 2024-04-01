@@ -14,18 +14,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class MyCanvas extends JPanel{
+    private final Color canvasBgColor = Color.WHITE;
     
     // constructor
     public MyCanvas(int canvaWidth, int canvaHeight) { //初始化關於Canvas的相關設定
 
         this.setPreferredSize(new Dimension(canvaWidth, canvaHeight));//建立一個視窗
-        this.setBackground(Color.WHITE);
+        this.setBackground(canvasBgColor);
         this.setLayout(new BorderLayout());
 
     }
 
     public void newCanvas(MyCanvas canvas){
-        canvas.setBackground(Color.WHITE);
+        canvas.setBackground(canvasBgColor);
         canvas.removeAll();
         canvas.repaint();
     }

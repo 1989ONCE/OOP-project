@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import menu.Menu;
+import toolbar.MyToolbar;
 
 
 public class MyFrame extends JFrame{
@@ -11,7 +12,7 @@ public class MyFrame extends JFrame{
     // set final to prevent from being changed
     private final String title = "UML Editor by Susan Chen";
     private final int frameWidth = 800;
-    private final int frameHeight = 600;
+    private final int frameHeight = 680;
     private MyCanvas canvas;
     private Menu menuBar;
     private MyToolbar toolBar;
