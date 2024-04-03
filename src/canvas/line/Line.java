@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import canvas.MyCanvas;
 import canvas.shape.Figure;
 import canvas.shape.Port;
-import init.MyFrame;
 
 public abstract class Line {
     protected int startX, startY;
@@ -39,13 +37,6 @@ public abstract class Line {
         startPort.setVisible(visible);
     }
 
-    public void setSelected(Figure figure, boolean selected) {
-        MyCanvas canvas = MyFrame.getFrame().getCanvas();
-        figure.setPortVisibility(selected);
-        canvas.setSelectedFigure(figure);
-        canvas.repaint();
-    }
-
     public Port getDraggedPort() {
         return draggedPort;
     }
@@ -61,14 +52,6 @@ public abstract class Line {
     public void setDepth(int i) {
         depth = i;
     }
-
-    // public void move(int dx, int dy) {
-    //     startX += dx;
-    //     startY += dy;
-    //     // moving won't change width and height
-    //     updatePorts(startX, startY, width, height);
-    //     setPortVisibility(true);
-    // }
 
     public boolean inSide(Figure figure, int x, int y, int width, int height) {
         return figure.getX() >= x && figure.getY() >= y && figure.getY() + figure.getWidth() <= x + width && figure.getY() + figure.getHeight() <= y + height;

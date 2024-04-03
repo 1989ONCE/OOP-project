@@ -60,13 +60,6 @@ public abstract class Figure {
         leftPort.setVisible(visible);
     }
 
-    public void setSelected(Figure figure, boolean selected) {
-        MyCanvas canvas = MyFrame.getFrame().getCanvas();
-        figure.setPortVisibility(selected);
-        canvas.setSelectedFigure(figure);
-        canvas.repaint();
-    }
-
     public Port getDraggedPort() {
         return draggedPort;
     }

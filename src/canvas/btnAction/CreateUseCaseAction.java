@@ -31,7 +31,7 @@ public class CreateUseCaseAction extends MouseAdapter implements ButtonAction {
             tempFigure.setFigureName("UseCase");
             canvas.addFigure(tempFigure);
             canvas.clearAllSelected(); // Clear all selected figures before creating a new one
-            tempFigure.setSelected(tempFigure, true); // Show the ports
+            tempFigure.setPortVisibility(true); // Show the ports
             canvas.setSelectedFigure(tempFigure);
             tempFigure = null;
             canvas.setTempFigure(null);

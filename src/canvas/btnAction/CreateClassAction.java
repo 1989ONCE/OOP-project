@@ -30,7 +30,7 @@ public class CreateClassAction extends MouseAdapter implements ButtonAction{
             tempFigure.setFigureName("Class");
             canvas.addFigure(tempFigure);
             canvas.clearAllSelected();
-            tempFigure.setSelected(tempFigure, true); // Show the ports
+            tempFigure.setPortVisibility(true); // Show the ports
             canvas.setSelectedFigure(tempFigure);
             tempFigure = null;
             canvas.setTempFigure(null);
