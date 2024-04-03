@@ -22,6 +22,7 @@ public class RenameObjectAction implements MenuAction{
         if(newName != null){ 
             selectedFigure.setFigureName(newName);
         }
+        MyFrame.getFrame().getCanvas().repaint();
     }
 
 }
