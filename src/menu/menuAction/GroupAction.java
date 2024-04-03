@@ -7,6 +7,10 @@ import canvas.shape.Figure;
 import canvas.shape.GroupFigure;
 import init.MyFrame;
 
+/*
+ * UseCase D.1 Group objects
+ * 將處於被選取狀態的基本物件合併成一個composite基本物件
+ */
 public class GroupAction extends MouseAdapter implements MenuAction{
     @Override
     public void execute() {
