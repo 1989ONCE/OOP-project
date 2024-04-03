@@ -26,6 +26,7 @@ import canvas.btnAction.CreateClassAction;
 import canvas.btnAction.CreateUseCaseAction;
 import canvas.btnAction.GeneralAction;
 import canvas.btnAction.SelectAction;
+import canvas.line.Line;
 import canvas.btnAction.CreateGroupAction;
 import canvas.shape.Figure;
 
@@ -33,7 +34,9 @@ public class MyCanvas extends JPanel {
     private Figure selectedFigure;
     private ButtonAction action;
     private ArrayList<Figure> figures = new ArrayList<>();
+    private ArrayList<Line> lines = new ArrayList<>();
     private Figure tempFigure;
+    private Line tempLine;
     private final String defaultAction = "Select";
     private final Color canvasBgColor = Color.WHITE;
     private final Map<String, ButtonAction> functions = new HashMap<>();
@@ -157,13 +160,31 @@ public class MyCanvas extends JPanel {
 
     public void clearFigures() {
         figures.clear();
+        System.out.println(lines.size());
+        lines.clear();
+        System.out.println(lines.size());
     }
 
     public void clearAllSelected() {
         figures.forEach(figure -> figure.setPortVisibility(false));
     }
 
-    
+    // function Lines, polymorphism
+    public void addLine(Line line) {
+        line.setDepth(figures.size());
+        System.out.println(line.getDepth());
+        lines.add(line);
+        this.repaint();
+    }
+
+    public void setTempLine(Line tempLine) {
+        this.tempLine = tempLine;
+    }
+
+    public ArrayList<Line> getLines() {
+        return lines;
+    }
+
     // function Figures, polymorphism
     public void addFigure(Figure figure) {
         figure.setDepth(figures.size());
@@ -171,7 +192,7 @@ public class MyCanvas extends JPanel {
         figures.add(figure);
         this.repaint();
     }
-    
+
     public void setTempFigure(Figure tempFigure) {
         this.tempFigure = tempFigure;
     }
@@ -200,19 +221,27 @@ public class MyCanvas extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // // draw all figures in order of the depth , polymorphism
+        // draw all figures, polymorphism
         for (Figure figure : figures) {
             figure.draw(g);
+        }
+
+        for (Line line : lines) {
+            line.draw(g);
         }
 
         if (tempFigure != null) {
             tempFigure.draw(g);
         }
+        if (tempLine != null) {
+            System.out.println("Temp Line: " + tempLine);
+            tempLine.draw(g);
+        }
     }
 
     public Figure getSelectedFigure() {
-        System.out.println(selectedFigure);
-        System.out.println(selectedFigure.getDepth());
+        // System.out.println(selectedFigure);
+        // System.out.println(selectedFigure.getDepth());
         return selectedFigure;
     }
 
