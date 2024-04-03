@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -27,12 +26,14 @@ import canvas.btnAction.CreateClassAction;
 import canvas.btnAction.CreateUseCaseAction;
 import canvas.btnAction.GeneralAction;
 import canvas.btnAction.SelectAction;
-import canvas.shape.UseCaseFigure;
+import canvas.btnAction.CreateGroupAction;
+import canvas.shape.Figure;
 
 public class MyCanvas extends JPanel {
+    private Figure selectedFigure;
     private ButtonAction action;
-    private Object currentFigure;
-    private List<Object> figures = new ArrayList<>();
+    private ArrayList<Figure> figures = new ArrayList<>();
+    private Figure tempFigure;
     private final String defaultAction = "Select";
     private final Color canvasBgColor = Color.WHITE;
     private final Map<String, ButtonAction> functions = new HashMap<>();
@@ -44,6 +45,7 @@ public class MyCanvas extends JPanel {
         functions.put("Composition Line", new CompositionAction());
         functions.put("Create Class", new CreateClassAction());
         functions.put("Create Use Case", new CreateUseCaseAction());
+        functions.put("Group", new CreateGroupAction());
     }
     
     // constructor
@@ -66,6 +68,11 @@ public class MyCanvas extends JPanel {
                 action.mouseClicked(e);
                 repaint();
             }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                action.mouseReleased(e);
+                repaint();
+            }
             
         });
 
@@ -78,14 +85,26 @@ public class MyCanvas extends JPanel {
 
             @Override
             public void mouseDragged(MouseEvent e) {
+                action.mouseDragged(e);
+                repaint();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                try {
+                    action.mouseMoved(e);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 repaint();
             }
         });
     }
 
+    // function for menu bar
     public void newCanvas(MyCanvas canvas){
         canvas.setBackground(canvasBgColor);
-        canvas.removeAll();
+        canvas.clearFigures();
         canvas.repaint();
     }
 
@@ -136,33 +155,68 @@ public class MyCanvas extends JPanel {
         return true;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        for (Object figure : figures) {
-            ((UseCaseFigure)figure).draw(g);
-        }
-        if (currentFigure != null) {
-            ((UseCaseFigure)currentFigure).draw(g);
-        }
+    public void clearFigures() {
+        figures.clear();
     }
 
-    public void setCurrentFigure(Object figure) {
-        this.currentFigure = figure;
+    public void clearAllSelected() {
+        figures.forEach(figure -> figure.setPortVisibility(false));
     }
 
-    public Object getCurrentFigure() {
-        return this.currentFigure;
+    
+    // function Figures, polymorphism
+    public void addFigure(Figure figure) {
+        figure.setDepth(figures.size());
+        System.out.println(figure.getDepth());
+        figures.add(figure);
+        this.repaint();
+    }
+    
+    public void setTempFigure(Figure tempFigure) {
+        this.tempFigure = tempFigure;
     }
 
-    public void addFigure(Object figure) {
-        this.figures.add(figure);
+    public ArrayList<Figure> getFigures() {
+        return figures;
     }
 
-    // update action if user change the button function
+    // UseCase A.1 Creating a UML object: Alternatives 1.a
+    // update action if user change the button function, used in FunctionBtn
     public void setAction(String btnName) {
         // polymorphism of MouseListener
         ButtonAction action = functions.get(btnName);
         this.action = action;
+
+        System.out.println(action);
+    }
+
+    public String getActionName() {
+        System.out.println(this.action.getClass().getSimpleName());
+        return this.action.getClass().getSimpleName();
+    }
+
+    // override the paintComponent method of JPanel, used to draw the figures
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // // draw all figures in order of the depth , polymorphism
+        for (Figure figure : figures) {
+            figure.draw(g);
+        }
+
+        if (tempFigure != null) {
+            tempFigure.draw(g);
+        }
+    }
+
+    public Figure getSelectedFigure() {
+        System.out.println(selectedFigure);
+        System.out.println(selectedFigure.getDepth());
+        return selectedFigure;
+    }
+
+    public void setSelectedFigure(Figure selectedFigure) {
+        this.selectedFigure = selectedFigure;
     }
 }
