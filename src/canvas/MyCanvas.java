@@ -27,7 +27,6 @@ import canvas.btnAction.CreateUseCaseAction;
 import canvas.btnAction.GeneralAction;
 import canvas.btnAction.SelectAction;
 import canvas.line.Line;
-import canvas.btnAction.CreateGroupAction;
 import canvas.shape.Figure;
 
 public class MyCanvas extends JPanel {
@@ -40,7 +39,6 @@ public class MyCanvas extends JPanel {
     private final String defaultAction = "Select";
     private final Color canvasBgColor = Color.WHITE;
     private final Map<String, ButtonAction> functions = new HashMap<>();
-    // private MyCanvas canvas = MyFrame.getFrame().getCanvas();
     {
         functions.put("Select", new SelectAction());
         functions.put("Association Line", new AssociateAction());
@@ -48,7 +46,6 @@ public class MyCanvas extends JPanel {
         functions.put("Composition Line", new CompositionAction());
         functions.put("Create Class", new CreateClassAction());
         functions.put("Create Use Case", new CreateUseCaseAction());
-        functions.put("Group", new CreateGroupAction());
     }
     
     // constructor
@@ -199,6 +196,10 @@ public class MyCanvas extends JPanel {
 
     public ArrayList<Figure> getFigures() {
         return figures;
+    }
+
+    public Figure getTempFigure() {
+        return tempFigure;
     }
 
     // UseCase A.1 Creating a UML object: Alternatives 1.a

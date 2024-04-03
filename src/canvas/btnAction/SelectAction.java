@@ -8,11 +8,14 @@ import java.util.ArrayList;
 
 import canvas.MyCanvas;
 import canvas.shape.Figure;
+import canvas.shape.GroupFigure;
 import init.MyFrame;
 
 public class SelectAction extends MouseAdapter implements ButtonAction {
     private Figure selectedFigure;
-    private Point lastMousePosition;
+    private Point startPoint;
+    private Point lastmousePosition;
+    private Figure tempGroupFigure;
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -23,6 +26,17 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
          */        
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         ArrayList<Figure> figures = canvas.getFigures();
+        this.startPoint = e.getPoint();
+        
+        // if startPoint is in the tempGroupFigure, select the tempGroupFigure
+        if (tempGroupFigure != null && tempGroupFigure.contains(startPoint.x, startPoint.y)) {
+            canvas.clearAllSelected();
+            this.selectedFigure = tempGroupFigure;
+            canvas.setSelectedFigure(selectedFigure);
+            // selectedFigure.setPortVisibility(true);
+            return;
+        }
+
         // Iterate backwards to start from the top figure
         for (int i = figures.size() - 1; i >= 0; i--) {
             Figure figure = figures.get(i);
@@ -36,13 +50,39 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
             }
         }
         canvas.clearAllSelected();
+        selectedFigure = null;
+        tempGroupFigure = null;
         canvas.setSelectedFigure(null);
+        canvas.setTempFigure(tempGroupFigure);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // release the mouse, lastMousePosition should be set to null to start a new drag
-        lastMousePosition = null;
+        lastmousePosition = null;
+        // if no figure is selected, create a temp group figure
+        if(tempGroupFigure != null && selectedFigure == null) {
+            MyCanvas canvas = MyFrame.getFrame().getCanvas();
+            Point endPoint = e.getPoint();
+            int width = endPoint.x - startPoint.x;
+            int height = endPoint.y - startPoint.y;
+
+            // Paint the GroupFigure only if there are more than 1 figure(including groupFigure) inside the GroupFigure
+            if (((GroupFigure)tempGroupFigure).getInsideFigures().size() > 1) {
+                tempGroupFigure.updatePorts(startPoint.x, startPoint.y, width, height);
+                tempGroupFigure.setFigureName("Group");                
+                tempGroupFigure.setPortVisibility(true);
+                selectedFigure = tempGroupFigure;
+                canvas.setSelectedFigure(tempGroupFigure);
+                for (Figure figure : ((GroupFigure)tempGroupFigure).getInsideFigures()) {
+                    figure.setPortVisibility(true);
+                }
+                return;
+            }
+            else {
+                tempGroupFigure = null;
+                canvas.setTempFigure(null);
+            }
+        }
     }
 
     @Override
@@ -57,13 +97,35 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (lastMousePosition != null) {
-            int dx = e.getX() - lastMousePosition.x;
-            int dy = e.getY() - lastMousePosition.y;
+        // if no figure is selected, create a temp group figure
+        if(selectedFigure == null) { 
+            MyCanvas canvas = MyFrame.getFrame().getCanvas();
+            Point endPoint = e.getPoint();
+            int width = endPoint.x - startPoint.x;
+            int height = endPoint.y - startPoint.y;
+            // Create a temporary group figure to show the process of creating a group figure
+            tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height);
+            canvas.setTempFigure(tempGroupFigure);
+
+            // Check if the figures are inside the tempGroupFigure
+            ArrayList<Figure> allFigures = canvas.getFigures();
+            for (Figure figure : allFigures) {
+                if(figure.getParent() != null) continue; // Skip the figure that is already in a group
+                else if (figure.inSide(figure, startPoint.x, startPoint.y, width, height)) {
+                    ((GroupFigure)tempGroupFigure).addFigureToList(figure);
+                }
+            }
+            return;
+        }
+        
+        // if a figure is selected, move the figure
+        if (lastmousePosition != null) {
+            int dx = e.getX() - lastmousePosition.x;
+            int dy = e.getY() - lastmousePosition.y;
             selectedFigure.move(dx, dy);
         }
         // update the last mouse position
-        lastMousePosition = e.getPoint();
+        lastmousePosition = e.getPoint();
     }
 
     @Override
