@@ -1,30 +1,46 @@
 package canvas.btnAction;
 
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class CreateClassAction implements ButtonAction{
-    
+import canvas.MyCanvas;
+import canvas.shape.ClassFigure;
+import init.MyFrame;
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // Implement the onClick method here
-        System.out.println("create class");
-    }
+// UseCase A.1 Creating a UML object
+// < UseCase A.1 Alternatives 1.a > See also: MyCanvas.java
+public class CreateClassAction extends MouseAdapter implements ButtonAction{
+    private Point startPoint;
+    private ClassFigure tempFigure;
 
-    @Override
+    @Override // only implement mousePressed because mouseClicked is same as mousePressed
     public void mousePressed(MouseEvent e) {
-        // Implement the onClick method here
-        System.out.println("onpress create class");
+        startPoint = e.getPoint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // Implement the mouseReleased method here
+        MyCanvas canvas = MyFrame.getFrame().getCanvas();
+        Point endPoint = e.getPoint();
+        if (tempFigure != null) {
+            // Create a new class figure after releasing the mouse
+            tempFigure.updatePorts(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+            canvas.addFigure(tempFigure);
+            canvas.clearAllSelected();
+            tempFigure.setSelected(tempFigure, true); // Show the ports
+            canvas.setSelectedFigure(tempFigure);
+            tempFigure = null;
+            canvas.setTempFigure(null);
+            canvas.repaint();
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         // Implement the mouseEntered method here
+
     }
 
     @Override
@@ -34,13 +50,18 @@ public class CreateClassAction implements ButtonAction{
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
+        MyCanvas canvas = MyFrame.getFrame().getCanvas();
+        Point endPoint = e.getPoint();
+        
+        // showing the process of creating a class through tempFigure
+        tempFigure = new ClassFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+        canvas.setTempFigure(tempFigure);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
-    }
+        // Set the cursor to the Crosshair cursor when entering the canvas
+        MyCanvas canvas = MyFrame.getFrame().getCanvas();
+        canvas.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+    }  
 }
