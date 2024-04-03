@@ -13,7 +13,6 @@ import init.MyFrame;
 public class SelectAction extends MouseAdapter implements ButtonAction {
     private Figure selectedFigure;
     private Point lastMousePosition;
-    private Point startPoint;
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -22,7 +21,6 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
          * Alternative 1.a 使用者點選的座標，不在任何基本物件內
          * Alternative 2.a 若有其他物件處於被 select 的狀態，取消它們被 select 的狀態。
          */        
-        this.startPoint = e.getPoint();
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         ArrayList<Figure> figures = canvas.getFigures();
         // Iterate backwards to start from the top figure

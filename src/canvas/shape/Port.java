@@ -1,75 +1,59 @@
 package canvas.shape;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
-import canvas.MyCanvas;
-import init.MyFrame;
-
-public class Port implements MouseMotionListener {
+public class Port {
+    private final int size = 10; // Default size
+    
     private int x, y;
-    private int size = 10; // Default size
+    private Figure connectedFigure;
     private boolean visible = false; // Default visibility
 
+    // Constructor
     public Port(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
     public void draw(Graphics g) {
         if (visible) {
-            g.fillRect(x - size / 2, y - size / 2, size, size);
+            // top-corner of the port
+            int topCornerX = x - size / 2;
+            int topCornerY = y - size / 2;
+            // x, y is the exact center of the port, minus half the size can draw the port 
+            // fillRect(topCornerX, topCornerY, width, height)
+            g.fillRect(topCornerX, topCornerY, this.size, this.size);
         }
+    }
+
+    // Getters and Setters
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+
+    public boolean isConnected() {
+        // if port connected to a figure, return true
+        return connectedFigure != null;
+    }
+
+    // Setters
+    public void setX(int newX) {
+        x = newX;
     }
 
     public void setY(int newY) {
         y = newY;
     }
 
-    public void setX(int newX) {
-        x = newX;
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-        MyCanvas canvas = MyFrame.getFrame().getCanvas();
-        canvas.getSelectedFigure().getDraggedPort().setX(e.getX());
-        canvas.getSelectedFigure().getDraggedPort().setY(e.getY());
-        canvas.repaint();
-        // this.setX(e.getX());
-        // this.setY(e.getY());
-        // Point endPoint = e.getPoint();
-        // ClassFigure tempFigure = new ClassFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);
-        // canvas.setTempClassFigure(tempFigure);
-        // canvas.repaint();
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
-    }
-
-    public Figure getFigure() {
-        Figure figure = MyFrame.getFrame().getCanvas().getSelectedFigure();
-        return figure;
+    public void setConnectedFigure(Figure figure) {
+        connectedFigure = figure;
     }
 
 }
