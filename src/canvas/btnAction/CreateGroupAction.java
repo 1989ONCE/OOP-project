@@ -31,6 +31,7 @@ public class CreateGroupAction extends MouseAdapter implements ButtonAction{
         // Paint the GroupFigure only if there are more than 1 basicfigure(composite figure not allowed) inside the GroupFigure
         if (((CompositeFigure)tempGroupFigure).getFigures().size() > 1) {
             tempGroupFigure.updatePorts(startPoint.x, startPoint.y, width, height);
+            tempGroupFigure.setFigureName("Group");
             canvas.addFigure(tempGroupFigure);
             canvas.clearAllSelected();
             tempGroupFigure.setSelected(tempGroupFigure, true);

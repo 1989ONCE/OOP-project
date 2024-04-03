@@ -32,11 +32,13 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
                 // The mouse click is within this figure, select it
                 canvas.clearAllSelected();
                 this.selectedFigure = figure;
+                canvas.setSelectedFigure(selectedFigure);
                 selectedFigure.setPortVisibility(true);
                 return;
             }
         }
         canvas.clearAllSelected();
+        canvas.setSelectedFigure(null);
     }
 
     @Override

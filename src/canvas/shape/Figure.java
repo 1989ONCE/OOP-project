@@ -6,6 +6,7 @@ import canvas.MyCanvas;
 import init.MyFrame;
 
 public abstract class Figure {
+    protected String figureName;
     protected int x, y, width, height;
     protected Color figureColor = Color.LIGHT_GRAY;
     protected Port topPort;
@@ -15,6 +16,14 @@ public abstract class Figure {
     protected Port draggedPort;
     protected int depth;
     private Figure parent;
+
+    public void setFigureName(String figureName) {
+        this.figureName = figureName;
+    }
+
+    public String getFigureName() {
+        return figureName;
+    }
 
     public Figure getParent() {
         return parent;

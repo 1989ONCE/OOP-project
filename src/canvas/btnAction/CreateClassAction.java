@@ -27,6 +27,7 @@ public class CreateClassAction extends MouseAdapter implements ButtonAction{
         if (tempFigure != null) {
             // Create a new class figure after releasing the mouse
             tempFigure.updatePorts(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+            tempFigure.setFigureName("Class");
             canvas.addFigure(tempFigure);
             canvas.clearAllSelected();
             tempFigure.setSelected(tempFigure, true); // Show the ports
