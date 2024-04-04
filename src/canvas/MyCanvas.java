@@ -203,6 +203,9 @@ public class MyCanvas extends JPanel {
         this.action = action;
 
         System.out.println(action);
+        selectedFigure = null;
+        clearAllSelected();
+        repaint();
     }
 
     public String getActionName() {
