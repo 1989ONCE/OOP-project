@@ -16,9 +16,11 @@ public class GroupAction extends MouseAdapter implements MenuAction{
     public void execute() {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         Figure tempGroupFigure = MyFrame.getFrame().getCanvas().getTempFigure();    
-        if(tempGroupFigure != null) {
+        String actionName = canvas.getActionName();
+        if(tempGroupFigure != null && actionName.equals("SelectAction")) {
             canvas.clearAllSelected();
             tempGroupFigure.setPortVisibility(true);
+            canvas.setSelectedFigure(tempGroupFigure);
             canvas.getFigures().add(tempGroupFigure);
             canvas.setTempFigure(null);
             for (Figure figure : ((GroupFigure)tempGroupFigure).getInsideFigures()) {
