@@ -1,20 +1,32 @@
 package canvas.shape;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import canvas.btnAction.GroupInterface;
 
 public class GroupFigure extends Figure implements GroupInterface {
+    // setting of dashed line
+    private final static float dash1[] = { 10.0f };
+    private final static BasicStroke dashed = new BasicStroke(1.0f,
+      BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
+
     public GroupFigure(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
     private ArrayList<Figure> compositeFigures = new ArrayList<>();
     
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g_) {
+        Graphics2D g = (Graphics2D) g_;
         g.setColor(this.figureColor);
-        // int levelHeight = height / 3;
+
+        // Draw a dashed rectangle
+        g.setStroke(dashed);
         g.drawRect(x, y, width, height);
+
+        // Draw ports
         topPort.draw(g);
         rightPort.draw(g);
         bottomPort.draw(g);
