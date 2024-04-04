@@ -4,16 +4,35 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 import canvas.MyCanvas;
 import canvas.shape.UseCaseFigure;
+import canvas.shape.ClassFigure;
+import canvas.shape.Figure;
 import init.MyFrame;
 
-// UseCase A.1 Creating a UML object
-// < UseCase A.1 Alternatives 1.a > See also: MyCanvas.java
-public class CreateUseCaseAction extends MouseAdapter implements ButtonAction {
+
+/* UseCase A.1 Creating a UML object
+ * Alternatives 1.a 使用者按其他按鈕，則切換到其他按鈕的 mode
+ * See also: MyCanvas.java setAction()
+ */
+public class CreateFigureAction extends MouseAdapter implements ButtonAction {
     private Point startPoint;
-    private UseCaseFigure tempFigure;
+    private Figure tempFigure;
+    private String figureType;
+    private Map<String, BiFunction<Point, Point, Figure>> figureCreators = new HashMap<>();
+    {
+        figureCreators.put("UseCase", (startPoint, endPoint) -> new UseCaseFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y));
+        figureCreators.put("Class", (startPoint, endPoint) -> new ClassFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y));
+    }
+
+    // Constructor
+    public CreateFigureAction(String figureType) {
+        this.figureType = figureType;
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -28,7 +47,7 @@ public class CreateUseCaseAction extends MouseAdapter implements ButtonAction {
         if (tempFigure != null) {
             // Create a new class figure after releasing the mouse
             tempFigure.updatePorts(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);
-            tempFigure.setFigureName("UseCase");
+            tempFigure.setFigureName(figureType);
             canvas.addFigure(tempFigure);
             canvas.clearAllSelected(); // Clear all selected figures before creating a new one
             tempFigure.setPortVisibility(true); // Show the ports
@@ -44,8 +63,11 @@ public class CreateUseCaseAction extends MouseAdapter implements ButtonAction {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         Point endPoint = e.getPoint();
         
+        // Get the figure from the creator map
+        BiFunction<Point, Point, Figure> createFigureFunction = figureCreators.get(figureType);
+
         // showing the process of creating a use case through tempFigure
-        tempFigure = new UseCaseFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+        tempFigure = createFigureFunction.apply(startPoint, endPoint);
         canvas.setTempFigure(tempFigure);
     }
 

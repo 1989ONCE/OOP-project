@@ -43,8 +43,8 @@ public class MyCanvas extends JPanel {
         functions.put("Association Line", new AssociateAction());
         functions.put("Generalization Line", new GeneralAction());
         functions.put("Composition Line", new CompositionAction());
-        functions.put("Create Class", new CreateClassAction());
-        functions.put("Create Use Case", new CreateUseCaseAction());
+        functions.put("Create Class", new CreateFigureAction("Class"));
+        functions.put("Create Use Case", new CreateFigureAction("UseCase"));
     }
     
     // constructor
@@ -198,7 +198,7 @@ public class MyCanvas extends JPanel {
     // UseCase A.1 Creating a UML object: Alternatives 1.a
     // update action if user change the button function, used in FunctionBtn
     public void setAction(String btnName) {
-        // polymorphism of MouseListener
+        // polymorphism of ButtonAction
         ButtonAction action = functions.get(btnName);
         this.action = action;
 
