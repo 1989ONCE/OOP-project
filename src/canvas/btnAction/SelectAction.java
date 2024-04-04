@@ -104,6 +104,7 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
         // if no figure is selected, create a temp group figure
         if(selectedFigure == null) { 
             MyCanvas canvas = MyFrame.getFrame().getCanvas();
+            canvas.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Point endPoint = e.getPoint();
             int width = endPoint.x - startPoint.x;
             int height = endPoint.y - startPoint.y;
