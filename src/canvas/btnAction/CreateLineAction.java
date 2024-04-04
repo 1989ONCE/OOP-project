@@ -4,9 +4,14 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 import canvas.MyCanvas;
+import canvas.line.AssociateLine;
 import canvas.line.CompositionLine;
+import canvas.line.GeneralizationLine;
 import canvas.line.Line;
 import canvas.shape.GroupFigure;
 import canvas.shape.Figure;
@@ -18,12 +23,25 @@ import init.MyFrame;
  * 使用者 mouse pressed 的座標，不在任何 class 或 use case 物件，則從 mouse pressed -> mouse drag -> mouse released 都不會有任何作用。
  * Alternative 3.a 使用者 mouse released 的座標，不在任何 class 或 use case 物件， 則不建立任何 connection line 物件。
  */
-public class CompositionAction extends MouseAdapter implements ButtonAction {
+public class CreateLineAction extends MouseAdapter implements ButtonAction {
+    private String lineType;
     private Line tempLine;
     private Figure startFigure = null;
     private Figure endFigure = null;
     private Port figureStartPort = null;
     private Port figureEndPort = null;
+    private Map<String, BiFunction<Integer, Integer, Line>> lineCreators = new HashMap<>();
+    {
+        lineCreators.put("Association", (startPointX, startPointY) -> new AssociateLine(startPointX, startPointY));
+        lineCreators.put("Generalization", (startPointX, startPointY) -> new GeneralizationLine(startPointX, startPointY));
+        lineCreators.put("Composition", (startPointX, startPointY) -> new CompositionLine(startPointX, startPointY));
+    }
+
+    // Constructor
+    public CreateLineAction(String lineType) {
+        this.lineType = lineType;
+    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -62,7 +80,6 @@ public class CompositionAction extends MouseAdapter implements ButtonAction {
             Figure figure = canvas.getFigures().get(i);
             if(figure.contains(endPoint.x, endPoint.y)) {
                 endFigure = figure;
-                endFigure.setPortVisibility(true);
                 break;
             }
         }
@@ -81,6 +98,10 @@ public class CompositionAction extends MouseAdapter implements ButtonAction {
         // figureStartPort != null : if the startFigure has available port
         if (tempLine != null && endFigure != null && figureStartPort != null) {
             figureEndPort = endFigure.getAvailableEndPort(endFigure);
+            if(figureEndPort == null){
+                canvas.setTempLine(null);
+                return;
+            }
             System.out.println("End port: " + figureEndPort);
             
             tempLine.updatePorts(figureStartPort.getX(), figureStartPort.getY(), figureEndPort.getX(), figureEndPort.getY());
@@ -92,6 +113,7 @@ public class CompositionAction extends MouseAdapter implements ButtonAction {
 
             startFigure.addConnectedLine(tempLine);
             endFigure.addConnectedLine(tempLine);
+            endFigure.setPortVisibility(true);
 
             tempLine.setStartPort(figureStartPort);
             tempLine.setEndPort(figureEndPort);
@@ -113,7 +135,9 @@ public class CompositionAction extends MouseAdapter implements ButtonAction {
         if(figureStartPort == null){
             return;
         }
-        tempLine = new CompositionLine(startFigure.getX(), startFigure.getY());
+
+        BiFunction<Integer, Integer, Line> createLineFunction = lineCreators.get(lineType);
+        tempLine = createLineFunction.apply(startFigure.getX(), startFigure.getY());
         tempLine.updatePorts(figureStartPort.getX(), figureStartPort.getY(), e.getX(), e.getY());
         canvas.setTempLine(tempLine);
         canvas.repaint();

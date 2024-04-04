@@ -40,9 +40,9 @@ public class MyCanvas extends JPanel {
     private Map<String, ButtonAction> functions = new HashMap<>();
     {
         functions.put("Select", new SelectAction());
-        functions.put("Association Line", new AssociateAction());
-        functions.put("Generalization Line", new GeneralAction());
-        functions.put("Composition Line", new CompositionAction());
+        functions.put("Association Line", new CreateLineAction("Association"));
+        functions.put("Generalization Line", new CreateLineAction("Generalization"));
+        functions.put("Composition Line", new CreateLineAction("Composition"));
         functions.put("Create Class", new CreateFigureAction("Class"));
         functions.put("Create Use Case", new CreateFigureAction("UseCase"));
     }
