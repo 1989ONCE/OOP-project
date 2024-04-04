@@ -23,6 +23,10 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
          * 
          * Alternative 1.a 使用者點選的座標，不在任何基本物件內
          * Alternative 2.a 若有其他物件處於被 select 的狀態，取消它們被 select 的狀態。
+         * 
+         ** UseCase C.2 Select/Unselect a group of objects
+         * 
+         * Alternative 4.a (x1,y1,x2,y2) 形成一個四方形的區域。在該區域內的沒有 基本物件完全落於此四方形區域。則本情境等於 unselect 所有之前處於被 select 的狀態。
          */        
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         ArrayList<Figure> figures = canvas.getFigures();
