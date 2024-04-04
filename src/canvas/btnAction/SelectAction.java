@@ -27,13 +27,14 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         ArrayList<Figure> figures = canvas.getFigures();
         this.startPoint = e.getPoint();
-        
+        System.out.println(canvas.getSelectedFigure());
         // if startPoint is in the tempGroupFigure, select the tempGroupFigure
-        if (tempGroupFigure != null && tempGroupFigure.contains(startPoint.x, startPoint.y)) {
+        if (canvas.getTempFigure() != null && canvas.getTempFigure().contains(startPoint.x, startPoint.y)) {
+            System.out.println("select action first if: " + canvas.getSelectedFigure());
             canvas.clearAllSelected();
             this.selectedFigure = tempGroupFigure;
             canvas.setSelectedFigure(selectedFigure);
-            // selectedFigure.setPortVisibility(true);
+            selectedFigure.setPortVisibility(true);
             return;
         }
 
@@ -42,6 +43,7 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
             Figure figure = figures.get(i);
             if (figure.contains(e.getX(), e.getY())) {
                 // The mouse click is within this figure, select it
+                System.out.println("select action second if: " + canvas.getSelectedFigure());
                 canvas.clearAllSelected();
                 this.selectedFigure = figure;
                 canvas.setSelectedFigure(selectedFigure);
@@ -49,6 +51,8 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
                 return;
             }
         }
+        System.out.println("select action third section: " + canvas.getSelectedFigure());
+
         canvas.clearAllSelected();
         selectedFigure = null;
         tempGroupFigure = null;

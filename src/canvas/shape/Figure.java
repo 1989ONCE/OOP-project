@@ -3,9 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import canvas.MyCanvas;
 import canvas.line.Line;
-import init.MyFrame;
 
 public abstract class Figure {
     // x, y: top-left corner of the figure
