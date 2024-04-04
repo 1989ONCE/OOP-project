@@ -34,12 +34,9 @@ public class UnGroupAction implements MenuAction{
         */
         if(selectedFigure != null && selectedFigure instanceof GroupFigure && actionName.equals("SelectAction")) {
             canvas.clearAllSelected();
-            boolean ans = canvas.getFigures().remove(selectedFigure);
-            System.out.println("Remove group figure: " + ans);  
-            System.out.println("size of figures: " + canvas.getFigures().size());
+            canvas.getFigures().remove(selectedFigure);
             canvas.setSelectedFigure(null);
             for (Figure figure : ((GroupFigure)selectedFigure).getInsideFigures()) {
-                System.out.println("Remove inside figure: " + figure);
                 figure.setParent(null);
             }
             ((GroupFigure)selectedFigure).getInsideFigures().clear();

@@ -102,7 +102,6 @@ public class CreateLineAction extends MouseAdapter implements ButtonAction {
                 canvas.setTempLine(null);
                 return;
             }
-            System.out.println("End port: " + figureEndPort);
             
             tempLine.updatePorts(figureStartPort.getX(), figureStartPort.getY(), figureEndPort.getX(), figureEndPort.getY());
             tempLine.setStartFigure(startFigure);
@@ -131,7 +130,6 @@ public class CreateLineAction extends MouseAdapter implements ButtonAction {
         }
 
         figureStartPort = startFigure.getAvailableStartPort(startFigure);
-        System.out.println(figureStartPort);
         if(figureStartPort == null){
             return;
         }

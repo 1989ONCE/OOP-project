@@ -40,10 +40,8 @@ public class Menu extends JMenuBar{
         // add menuItem
         for (int i = 0; i < menuOption.size(); i++) {
             JMenu jmenu = new JMenu(menuOption.get(i));
-            System.out.println("MenuOption.get(i): " + menuOption.get(i));
             for (int j = 0; j < grandItem.get(i).size(); j++) {
                 MenuItem menuItem = new MenuItem(grandItem.get(i).get(j));
-                System.out.println("MenuOption.get(i): " + grandItem.get(i).get(j));
                 jmenu.add(menuItem);
             }
             this.add(jmenu);

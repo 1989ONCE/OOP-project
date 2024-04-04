@@ -22,14 +22,13 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         ArrayList<Figure> figures = canvas.getFigures();
         this.startPoint = e.getPoint();
-        System.out.println(canvas.getSelectedFigure());
+
         /** UseCase C.2 Select/Unselect a group of objects
          * 
          * Alternative 4.a (x1,y1,x2,y2) 形成一個四方形的區域。在該區域內的沒有 基本物件完全落於此四方形區域。則本情境等於 unselect 所有之前處於被 select 的狀態。
          **/ 
         // if startPoint is in the tempGroupFigure, select the tempGroupFigure
         if (canvas.getTempFigure() != null && canvas.getTempFigure().contains(startPoint.x, startPoint.y)) {
-            System.out.println("select action first if: " + canvas.getSelectedFigure());
             canvas.clearAllSelected();
             this.selectedFigure = tempGroupFigure;
             canvas.setSelectedFigure(selectedFigure);
@@ -49,7 +48,6 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
             Figure figure = figures.get(i);
             if (figure.contains(e.getX(), e.getY())) {
                 // The mouse click is within this figure, select it
-                System.out.println("select action second if: " + canvas.getSelectedFigure());
                 canvas.clearAllSelected();
                 this.selectedFigure = figure;
                 canvas.setSelectedFigure(selectedFigure);
@@ -59,8 +57,6 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
         }
 
         // if startPoint isn't in any figure, clear all selected figures
-        System.out.println("select action third section: " + canvas.getSelectedFigure());
-
         canvas.clearAllSelected();
         selectedFigure = null;
         tempGroupFigure = null;

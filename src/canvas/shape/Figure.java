@@ -41,7 +41,6 @@ public abstract class Figure {
 
     public void fillPort(Port figureStartPort, Figure figure) {
         figureStartPort.setConnectedFigure(figure);
-        System.out.println(figureStartPort + " is connected to " + figure.getFigureName());
     }
 
     /* UseCase E.1 Move objects */
@@ -53,7 +52,6 @@ public abstract class Figure {
         
         setPortVisibility(true);
 
-        System.out.println("Connected lines: " + connectedLines.size());
         // Update the connected lines
         for (Line line : connectedLines) {
 
@@ -61,7 +59,6 @@ public abstract class Figure {
                 line.updateConnectedStartPort(dx, dy);
             }
             else if(line.getEndFigure() == this) {
-                System.out.println("Line: " + line);
                 line.updateConnectedEndPort(dx, dy);
             }
         }
@@ -102,45 +99,33 @@ public abstract class Figure {
 
     public Port getAvailableStartPort(Figure figure) {
         if (figure == null) {
-            System.out.println("Figure is null");
             return null;
         }
         if (!figure.getRightPort().isConnected()) {
-            System.out.println("Right port is available");
             return figure.getRightPort();
         } else if (!figure.getBottomPort().isConnected()) {
-            System.out.println("Bottom port is available");
             return figure.getBottomPort();
         } else if (!figure.getTopPort().isConnected()) {
-            System.out.println("Top port is available");
             return figure.getTopPort();
         } else if (!figure.getLeftPort().isConnected()) {
-            System.out.println("Left port is available");
             return figure.getLeftPort();
         }
-        System.out.println("No port is available");
         return null;
     }
 
     public Port getAvailableEndPort(Figure figure) {
         if (figure == null) {
-            System.out.println("Figure is null");
             return null;
         }
         if (!figure.getLeftPort().isConnected()) {
-            System.out.println("Right port is available");
             return figure.getLeftPort();
         } else if (!figure.getBottomPort().isConnected()) {
-            System.out.println("Bottom port is available");
             return figure.getBottomPort();
         } else if (!figure.getTopPort().isConnected()) {
-            System.out.println("Top port is available");
             return figure.getTopPort();
         } else if (!figure.getRightPort().isConnected()) {
-            System.out.println("Left port is available");
             return figure.getRightPort();
         }
-        System.out.println("No port is available");
         return null;
     }
 

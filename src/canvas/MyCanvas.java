@@ -53,7 +53,6 @@ public class MyCanvas extends JPanel {
         this.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
         this.setBackground(canvasBgColor);
 
-        // System.out.println(action);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) { // only implement mousePressed, cause is the same as mouseClicked
@@ -119,7 +118,6 @@ public class MyCanvas extends JPanel {
                     boolean isSaved = canvas.saveCanvas(canvas);
                     if(isSaved){
                         canvas.newCanvas(canvas);
-                        System.out.println("Save and Open New Canvas");
                         return false;
                     }
                     else{
@@ -141,9 +139,7 @@ public class MyCanvas extends JPanel {
     // clearing all figures and lines on canvas
     public void clearFigures() {
         figures.clear();
-        System.out.println(lines.size());
         lines.clear();
-        System.out.println(lines.size());
     }
 
     // setPortVisibility to false for all figures
@@ -168,7 +164,6 @@ public class MyCanvas extends JPanel {
     // function Figures, polymorphism
     public void addFigure(Figure figure) {
         figure.setDepth(figures.size());
-        System.out.println(figure.getDepth());
         figures.add(figure);
         this.repaint();
     }
@@ -186,8 +181,6 @@ public class MyCanvas extends JPanel {
     }
 
     public Figure getSelectedFigure() {
-        // System.out.println(selectedFigure);
-        // System.out.println(selectedFigure.getDepth());
         return selectedFigure;
     }
 
@@ -202,14 +195,12 @@ public class MyCanvas extends JPanel {
         ButtonAction action = functions.get(btnName);
         this.action = action;
 
-        System.out.println(action);
         selectedFigure = null;
         clearAllSelected();
         repaint();
     }
 
     public String getActionName() {
-        System.out.println(this.action.getClass().getSimpleName());
         return this.action.getClass().getSimpleName();
     }
 
@@ -234,7 +225,6 @@ public class MyCanvas extends JPanel {
             tempFigure.draw(g);
         }
         if (tempLine != null) {
-            System.out.println("Temp Line: " + tempLine);
             tempLine.draw(g);
         }
     }
