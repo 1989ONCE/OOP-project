@@ -15,6 +15,11 @@ public class UnGroupAction implements MenuAction{
         Figure selectedFigure = canvas.getSelectedFigure();
         String actionName = canvas.getActionName();
         Figure tempGroupFigure = MyFrame.getFrame().getCanvas().getTempFigure();
+
+        /* if there is a tempGroupFigure, clear all selected figures and remove the tempGroupFigure
+         * this situation happens when user selects group of figures, but not yet grouped them 
+         * and then click ungroup button
+        */
         if(tempGroupFigure != null) {
             canvas.clearAllSelected();
             ((GroupFigure)tempGroupFigure).getInsideFigures().clear();
@@ -23,6 +28,10 @@ public class UnGroupAction implements MenuAction{
             return;
         }
 
+        
+        /* if there is a selectedFigure, and selectedFigure is a group figure, and the function button is on "Select"
+         * this situation happens when user selects a group figure, and wants to ungroup it
+        */
         if(selectedFigure != null && selectedFigure instanceof GroupFigure && actionName.equals("SelectAction")) {
             canvas.clearAllSelected();
             boolean ans = canvas.getFigures().remove(selectedFigure);
@@ -37,8 +46,6 @@ public class UnGroupAction implements MenuAction{
             canvas.repaint();
             return;
         }
-
-        
     }
     
 }

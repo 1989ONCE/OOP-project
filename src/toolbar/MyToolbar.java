@@ -2,7 +2,6 @@ package toolbar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -10,9 +9,20 @@ import init.MyFrame;
 
 public class MyToolbar extends JToolBar {
     private final int toolBarWidth = 100;
+    private final Color toolBarColor = Color.LIGHT_GRAY;
+    private final int toolBarOrientation = SwingConstants.VERTICAL;
+    private FunctionBtn selectedBtn;
 
     // btn options and images
-    private ArrayList<String> btnOption = new ArrayList<String>(Arrays.asList("Select", "Association Line", "Generalization Line", "Composition Line", "Create Class", "Create Use Case"));
+    private ArrayList<String> btnOption = new ArrayList<String>();
+    {
+        btnOption.add("Select");
+        btnOption.add("Association Line");
+        btnOption.add("Generalization Line");
+        btnOption.add("Composition Line");
+        btnOption.add("Create Class");
+        btnOption.add("Create Use Case");
+    }
     private ArrayList<String> btnUnselectedImg = new ArrayList<String>();
     {
         btnUnselectedImg.add("btnImg/select.png");
@@ -33,16 +43,11 @@ public class MyToolbar extends JToolBar {
         btnSelectedImg.add("btnImg/usecase_antiwhite.png");
     }
 
-    private final Color toolBarColor = Color.LIGHT_GRAY;
-    private FunctionBtn selectedBtn;
-
-
-
     // constructor
     public MyToolbar(int toolBarHeight) {
         this.setToolBar(this);
         this.setPreferredSize(new Dimension(toolBarWidth, toolBarHeight));
-        this.setBackground(toolBarColor);
+        this.setBackground(this.toolBarColor);
         this.setFloatable(false); // user can't move the toolbar
 
         // add buttons
@@ -54,10 +59,8 @@ public class MyToolbar extends JToolBar {
             }
             this.add(functionBtn);
         }
-        this.setOrientation(SwingConstants.VERTICAL); // set the the toolbar vertically
+        this.setOrientation(toolBarOrientation); // set the the toolbar vertically
     }
-
-
 
     // set functions
     public void setToolBar(MyToolbar inputToolbar) {

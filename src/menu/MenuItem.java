@@ -17,6 +17,7 @@ import menu.menuAction.RenameObjectAction;
 
 public class MenuItem extends JMenuItem implements ActionListener{
     
+    // menuitems' name and corresponding menuActions
     private final Map<String, MenuAction> actions = new HashMap<>();
     {
         actions.put("Open New Canvas", new OpenNewCanvasAction());
@@ -35,6 +36,7 @@ public class MenuItem extends JMenuItem implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
+
         // polymorphism of MenuAction
         MenuAction action = actions.get(actionCommand);
         if (action != null) {

@@ -1,19 +1,38 @@
 package menu;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 public class Menu extends JMenuBar{
     private final int menuHeight = 30;
-    private ArrayList<String> menuOption = new ArrayList<String>(Arrays.asList("File", "Edit"));
-    
-    private ArrayList<String> fileMenuItem = new ArrayList<String>(Arrays.asList("Open New Canvas", "Save As...", "Close Window"));
-    private ArrayList<String> editMenuItem = new ArrayList<String>(Arrays.asList("Group", "UnGroup", "Rename Object"));
-    private ArrayList<ArrayList<String>> grandItem = new ArrayList<>(Arrays.asList(fileMenuItem, editMenuItem));
-    
+
+    // menu options and corresponding menu items
+    private ArrayList<String> menuOption = new ArrayList<String>();
+    {
+        menuOption.add("File");
+        menuOption.add("Edit");
+    }
+    private ArrayList<String> fileMenuItem = new ArrayList<String>();
+    {
+        fileMenuItem.add("Open New Canvas");
+        fileMenuItem.add("Save As...");
+        fileMenuItem.add("Close Window");
+    }
+    private ArrayList<String> editMenuItem = new ArrayList<String>();
+    {
+        editMenuItem.add("Group");
+        editMenuItem.add("UnGroup");
+        editMenuItem.add("Rename Object");
+    }
+    private ArrayList<ArrayList<String>> grandItem = new ArrayList<>();
+    {
+        grandItem.add(fileMenuItem);
+        grandItem.add(editMenuItem);
+    }
+
+
     // constructor
     public Menu(int menuWidth) {
         this.setPreferredSize(new Dimension(menuWidth, menuHeight));
@@ -30,6 +49,8 @@ public class Menu extends JMenuBar{
         }
        
     }
+
+    // Getters
     public int getMenuHeight() {
         return this.menuHeight;
     }

@@ -31,7 +31,9 @@ public class RenameObjectAction implements MenuAction{
         if(newName != null){ 
             selectedFigure.setFigureName(newName);
         }
-        MyFrame.getFrame().getCanvas().repaint();
+
+        // update the canvas with the new name of the selectedFigure
+        canvas.repaint();
     }
 
 }

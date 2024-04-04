@@ -17,6 +17,11 @@ public class GroupAction extends MouseAdapter implements MenuAction{
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         Figure tempGroupFigure = MyFrame.getFrame().getCanvas().getTempFigure();    
         String actionName = canvas.getActionName();
+
+        /* if there is a tempFigure, and the function button is on "Select"
+         * this situation happens when user selects a group figure, and wants to group it
+         * after pressing "Group" on the edit menu, the group figure will be added to the canvas
+        */
         if(tempGroupFigure != null && actionName.equals("SelectAction")) {
             canvas.clearAllSelected();
             tempGroupFigure.setPortVisibility(true);

@@ -57,6 +57,7 @@ public class FunctionBtn extends JButton {
         });
     }
 
+    // Getters
     public String getBtnName() {
         return this.getToolTipText();
     }
