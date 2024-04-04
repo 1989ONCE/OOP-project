@@ -19,7 +19,8 @@ public class MyUmlBase {
 
     public static void init() {
         MyFrame myFrame = new MyFrame(); // 初始化Frame
-        JOptionPane.showMessageDialog(myFrame, "Welcome to UML Editor by Susan Chen");
+        String welcomeMessage = "Welcome to UML Editor developed by Susan Chen";
+        JOptionPane.showMessageDialog(myFrame, welcomeMessage);
         
         myFrame.initSection(myFrame); // 初始化Canvas, Toolbar, Menu
         myFrame.revalidate(); // 因為JOptonPane會導致畫面重繪問題，所以使用revalidate(), repaint()重新繪製畫面
