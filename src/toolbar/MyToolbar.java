@@ -13,12 +13,25 @@ public class MyToolbar extends JToolBar {
 
     // btn options and images
     private ArrayList<String> btnOption = new ArrayList<String>(Arrays.asList("Select", "Association Line", "Generalization Line", "Composition Line", "Create Class", "Create Use Case"));
-    private ArrayList<String> btnUnselectedImg = new ArrayList<String>(
-            Arrays.asList("btnImg/select.png", "btnImg/assoLine.png", "btnImg/general.png", "btnImg/compo.png", "btnImg/class.png", "btnImg/usecase.png")
-    );
-    private ArrayList<String> btnSelectedImg = new ArrayList<String>(
-            Arrays.asList("btnImg/select_antiwhite.png", "btnImg/assoLine_antiwhite.png", "btnImg/general_antiwhite.png", "btnImg/compo_antiwhite.png", "btnImg/class_antiwhite.png", "btnImg/usecase_antiwhite.png")
-    );
+    private ArrayList<String> btnUnselectedImg = new ArrayList<String>();
+    {
+        btnUnselectedImg.add("btnImg/select.png");
+        btnUnselectedImg.add("btnImg/assoLine.png");
+        btnUnselectedImg.add("btnImg/general.png");
+        btnUnselectedImg.add("btnImg/compo.png");
+        btnUnselectedImg.add("btnImg/class.png");
+        btnUnselectedImg.add("btnImg/usecase.png");
+    }
+    
+    private ArrayList<String> btnSelectedImg = new ArrayList<String>();
+    {
+        btnSelectedImg.add("btnImg/select_antiwhite.png");
+        btnSelectedImg.add("btnImg/assoLine_antiwhite.png");
+        btnSelectedImg.add("btnImg/general_antiwhite.png");
+        btnSelectedImg.add("btnImg/compo_antiwhite.png");
+        btnSelectedImg.add("btnImg/class_antiwhite.png");
+        btnSelectedImg.add("btnImg/usecase_antiwhite.png");
+    }
 
     private final Color toolBarColor = Color.LIGHT_GRAY;
     private FunctionBtn selectedBtn;
