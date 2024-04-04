@@ -2,14 +2,14 @@ package canvas.shape;
 import java.awt.*;
 
 public class ClassFigure extends Figure {
-    
-    
-    // Add other properties like ports here...
 
+    // Constructor
     public ClassFigure(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
 
+    // polymorphism
+    @Override
     public void draw(Graphics g) {
         g.setColor(this.figureColor);
         int levelHeight = height / 3;
@@ -32,26 +32,4 @@ public class ClassFigure extends Figure {
         bottomPort.draw(g);
         leftPort.draw(g);
     }
-    
-    // @Override
-    // public void resizeBasedOn(Port port) {
-    //     Figure selectedFigure = port.getFigure();
-    //     // Adjust the width and height based on the position of the port
-    //     if(port == this.topPort) {
-    //         this.height = this.y + this.height - port.getY();
-    //         this.y = port.getY();
-    //     }
-    //     else if(port == this.bottomPort){
-    //         this.height = Math.abs(port.getY() - this.y);
-    //     }
-    //     else if(port == this.leftPort) {
-    //         this.width = this.x + this.width - port.getX();
-    //         this.x = port.getX();
-    //     }
-    //     else if(port == this.rightPort) {
-    //         this.width = Math.abs(port.getX() - this.x);
-    //     }
-    //     selectedFigure.updatePorts(this.x, this.y, this.width, this.height);
-    //     selectedFigure.setPortVisibility(true);
-    // }
 }

@@ -39,17 +39,6 @@ public class CreateClassAction extends MouseAdapter implements ButtonAction{
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-        // Implement the mouseEntered method here
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // Implement the mouseExited method here
-    }
-
-    @Override
     public void mouseDragged(MouseEvent e) {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         Point endPoint = e.getPoint();

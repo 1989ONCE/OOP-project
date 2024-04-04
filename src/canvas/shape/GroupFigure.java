@@ -5,24 +5,25 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.util.ArrayList;
-import canvas.btnAction.GroupInterface;
+// import canvas.btnAction.GroupInterface;
 
-public class GroupFigure extends Figure implements GroupInterface {
+public class GroupFigure extends Figure {
     // setting of dashed line
-    private final static float dash1[] = { 10.0f };
-    private final static BasicStroke dashed = new BasicStroke(1.0f,
+    private final float dash1[] = { 10.0f };
+    private final BasicStroke dashed = new BasicStroke(1.0f,
       BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
-
+    private ArrayList<Figure> compositeFigures = new ArrayList<>();
+    
+    // Constructor
     public GroupFigure(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
-    private ArrayList<Figure> compositeFigures = new ArrayList<>();
-    
+
+    // polymorphism
     @Override
     public void draw(Graphics g_) {
         Graphics2D g = (Graphics2D) g_;
         g.setColor(this.figureColor);
-
 
         // Save the original stroke
         Stroke originalStroke = g.getStroke();
@@ -46,20 +47,10 @@ public class GroupFigure extends Figure implements GroupInterface {
             figure.move(dx, dy);
         }
     }
-    // @Override
-    // public void resizeBasedOn(Port port) {
-    //     for (Figure figure : compositeFigures) {
-    //         figure.resizeBasedOn(port);
-    //     }
-    // }
-
-    @Override
+    
     public void addFigureToList(Figure figure) {
         this.compositeFigures.add(figure);
     }
-    
-    // Add getters and setters for x, y, width, height here...
-    // Add methods for handling ports here...
 
     public ArrayList<Figure> getInsideFigures() {
         return compositeFigures;

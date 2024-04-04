@@ -15,8 +15,8 @@ public class RenameObjectAction implements MenuAction{
     @Override
     public void execute() {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
-        Figure selectedFigure = MyFrame.getFrame().getCanvas().getSelectedFigure();
-        Figure tempGroupFigure = MyFrame.getFrame().getCanvas().getTempFigure();
+        Figure selectedFigure = canvas.getSelectedFigure();
+        Figure tempGroupFigure = canvas.getTempFigure();
         // if no figure is selected or there is a tempGroupFigure, do nothing and return
         if(selectedFigure == null || tempGroupFigure != null){
             canvas.clearAllSelected();

@@ -1,18 +1,19 @@
 package toolbar;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
-
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
 import init.MyFrame;
 
 public class MyToolbar extends JToolBar {
     private final int toolBarWidth = 100;
     private final Color toolBarColor = Color.LIGHT_GRAY;
     private final int toolBarOrientation = SwingConstants.VERTICAL;
+    
     private FunctionBtn selectedBtn;
-
     // btn options and images
     private ArrayList<String> btnOption = new ArrayList<String>();
     {
@@ -62,7 +63,7 @@ public class MyToolbar extends JToolBar {
         this.setOrientation(toolBarOrientation); // set the the toolbar vertically
     }
 
-    // set functions
+    // Setters
     public void setToolBar(MyToolbar inputToolbar) {
        MyFrame.getFrame().setToolBar(inputToolbar);
     }
@@ -72,7 +73,7 @@ public class MyToolbar extends JToolBar {
         this.selectedBtn = btn;
     }
 
-    // get functions
+    // Getters
     public int getToolBarWidth() {
         return this.toolBarWidth;
     }

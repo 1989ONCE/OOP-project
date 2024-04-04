@@ -19,29 +19,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import canvas.btnAction.AssociateAction;
-import canvas.btnAction.ButtonAction;
-import canvas.btnAction.CompositionAction;
-import canvas.btnAction.CreateClassAction;
-import canvas.btnAction.CreateUseCaseAction;
-import canvas.btnAction.GeneralAction;
-import canvas.btnAction.SelectAction;
+import canvas.btnAction.*;
 import canvas.line.Line;
 import canvas.shape.Figure;
 
 public class MyCanvas extends JPanel {
-    private final String canvasName = "Canvas";
+
+    // final member
     private final int canvasNameStartX = 10;
     private final int canvasNameStartY = 25;
-    private Figure selectedFigure;
+    private final String canvasName = "Canvas";
+    private final String defaultAction = "Select";
+    private final Color canvasBgColor = Color.WHITE;
+
+    private Figure selectedFigure, tempFigure;
     private ButtonAction action;
     private ArrayList<Figure> figures = new ArrayList<>();
     private ArrayList<Line> lines = new ArrayList<>();
-    private Figure tempFigure;
     private Line tempLine;
-    private final String defaultAction = "Select";
-    private final Color canvasBgColor = Color.WHITE;
-    private final Map<String, ButtonAction> functions = new HashMap<>();
+    private Map<String, ButtonAction> functions = new HashMap<>();
     {
         functions.put("Select", new SelectAction());
         functions.put("Association Line", new AssociateAction());
@@ -57,20 +53,14 @@ public class MyCanvas extends JPanel {
         this.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
         this.setBackground(canvasBgColor);
 
-        
         // System.out.println(action);
         this.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) { // only implement mousePressed, cause is the same as mouseClicked
                 action.mousePressed(e);
                 repaint();
             }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                action.mouseClicked(e);
-                repaint();
-            }
+            
             @Override
             public void mouseReleased(MouseEvent e) {
                 action.mouseReleased(e);
@@ -81,12 +71,6 @@ public class MyCanvas extends JPanel {
 
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                action.mouseMoved(e);
-                repaint();
-            }
-
-            @Override
             public void mouseDragged(MouseEvent e) {
                 action.mouseDragged(e);
                 repaint();
@@ -94,11 +78,7 @@ public class MyCanvas extends JPanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                try {
-                    action.mouseMoved(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                action.mouseMoved(e);
                 repaint();
             }
         });
@@ -158,6 +138,7 @@ public class MyCanvas extends JPanel {
         return true;
     }
 
+    // clearing all figures and lines on canvas
     public void clearFigures() {
         figures.clear();
         System.out.println(lines.size());
@@ -165,14 +146,13 @@ public class MyCanvas extends JPanel {
         System.out.println(lines.size());
     }
 
+    // setPortVisibility to false for all figures
     public void clearAllSelected() {
         figures.forEach(figure -> figure.setPortVisibility(false));
     }
 
-    // function Lines, polymorphism
+    // function of Lines, polymorphism
     public void addLine(Line line) {
-        line.setDepth(figures.size());
-        System.out.println(line.getDepth());
         lines.add(line);
         this.repaint();
     }
@@ -203,6 +183,16 @@ public class MyCanvas extends JPanel {
 
     public Figure getTempFigure() {
         return tempFigure;
+    }
+
+    public Figure getSelectedFigure() {
+        // System.out.println(selectedFigure);
+        // System.out.println(selectedFigure.getDepth());
+        return selectedFigure;
+    }
+
+    public void setSelectedFigure(Figure selectedFigure) {
+        this.selectedFigure = selectedFigure;
     }
 
     // UseCase A.1 Creating a UML object: Alternatives 1.a
@@ -244,15 +234,5 @@ public class MyCanvas extends JPanel {
             System.out.println("Temp Line: " + tempLine);
             tempLine.draw(g);
         }
-    }
-
-    public Figure getSelectedFigure() {
-        // System.out.println(selectedFigure);
-        // System.out.println(selectedFigure.getDepth());
-        return selectedFigure;
-    }
-
-    public void setSelectedFigure(Figure selectedFigure) {
-        this.selectedFigure = selectedFigure;
     }
 }

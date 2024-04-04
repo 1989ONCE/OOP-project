@@ -1,7 +1,7 @@
 package menu;
+
 import java.awt.Dimension;
 import java.util.ArrayList;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -37,6 +37,7 @@ public class Menu extends JMenuBar{
     public Menu(int menuWidth) {
         this.setPreferredSize(new Dimension(menuWidth, menuHeight));
 
+        // add menuItem
         for (int i = 0; i < menuOption.size(); i++) {
             JMenu jmenu = new JMenu(menuOption.get(i));
             System.out.println("MenuOption.get(i): " + menuOption.get(i));

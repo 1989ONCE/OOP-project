@@ -1,13 +1,12 @@
 package toolbar;
 
-import javax.swing.ImageIcon;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 import canvas.MyCanvas;
 import init.MyFrame;
@@ -25,13 +24,14 @@ public class FunctionBtn extends JButton {
     // Constructor
     public FunctionBtn(String btnName, String unselectedImagePath, String selectedImagePath) {
         this.setMargin(new Insets(btnMarginY, btnMarginX, btnMarginY, btnMarginX));
-        this.setToolTipText(btnName);
+        this.setPreferredSize(new Dimension(btnWidth, btnHeight));
+        this.setToolTipText(btnName); // when the mouse hover on function button, the button name would show as a tooltip
+
         // L&F (Look and Feel) customization
         this.setBackground(btnBgColor);
         this.setOpaque(true);
         this.setBorderPainted(false);
 
-        this.setPreferredSize(new Dimension(btnWidth, btnHeight));
         URL unselectedImageURL = getClass().getResource(unselectedImagePath);
         if (unselectedImageURL != null) {
             this.setIcon(new ImageIcon(unselectedImageURL));
@@ -53,13 +53,7 @@ public class FunctionBtn extends JButton {
             MyCanvas canvas = MyFrame.getFrame().getCanvas();
             toolbar.getSelectedBtn().setSelected(false);
             toolbar.setSelectedBtn(this);
-            canvas.setAction(toolbar.getSelectedBtn().getBtnName());
+            canvas.setAction(toolbar.getSelectedBtn().getToolTipText());
         });
     }
-
-    // Getters
-    public String getBtnName() {
-        return this.getToolTipText();
-    }
-
 }

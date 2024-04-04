@@ -1,7 +1,5 @@
 package menu.menuAction;
 
-import java.awt.event.MouseAdapter;
-
 import canvas.MyCanvas;
 import canvas.shape.Figure;
 import canvas.shape.GroupFigure;
@@ -11,11 +9,11 @@ import init.MyFrame;
  * UseCase D.1 Group objects
  * 將處於被選取狀態的基本物件合併成一個composite基本物件
  */
-public class GroupAction extends MouseAdapter implements MenuAction{
+public class GroupAction implements MenuAction{
     @Override
     public void execute() {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
-        Figure tempGroupFigure = MyFrame.getFrame().getCanvas().getTempFigure();    
+        Figure tempGroupFigure = canvas.getTempFigure();    
         String actionName = canvas.getActionName();
 
         /* if there is a tempFigure, and the function button is on "Select"

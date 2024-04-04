@@ -8,14 +8,10 @@ import canvas.line.Line;
 public abstract class Figure {
     // x, y: top-left corner of the figure
     // width, height: width and height of the figure
-    protected int x, y, width, height;
-    protected Color figureColor = Color.LIGHT_GRAY;
-    protected Port topPort;
-    protected Port bottomPort;
-    protected Port leftPort;
-    protected Port rightPort;
-    protected Port draggedPort;
-    protected int depth;
+    protected final Color figureColor = Color.LIGHT_GRAY;
+
+    protected int x, y, width, height, depth;
+    protected Port topPort, bottomPort, leftPort, rightPort, draggedPort;
     protected String figureName;
     private Figure parent;
     private ArrayList<Line> connectedLines = new ArrayList<>();
@@ -33,51 +29,19 @@ public abstract class Figure {
         updatePorts(x, y, width, height);
     }
 
-    public void draw(Graphics g){}
-
-    public Port getTopPort() { return topPort; }
-    public Port getRightPort() { return rightPort; }
-    public Port getBottomPort() { return bottomPort; }
-    public Port getLeftPort() { return leftPort; }
-
-    public void updatePorts(int x, int y, int width, int height) {
-        topPort.setX(x + width / 2);
-        topPort.setY(y);
-        rightPort.setX(x + width);
-        rightPort.setY(y + height / 2);
-        bottomPort.setX(x + width / 2);
-        bottomPort.setY(y + height);
-        leftPort.setX(x);
-        leftPort.setY(y + height / 2);
-    }
-
-    public void setPortVisibility(boolean visible) {
-        topPort.setVisible(visible);
-        rightPort.setVisible(visible);
-        bottomPort.setVisible(visible);
-        leftPort.setVisible(visible);
-    }
-
-    public Port getDraggedPort() {
-        return draggedPort;
-    }
-
-    public void setDraggedPort(Port draggedPort) {
-        this.draggedPort = draggedPort;
-    }
-
-    // public abstract void resizeBasedOn(Port port);
-
+    public abstract void draw(Graphics g);
+    
     public boolean contains(int pointX, int pointY) {
         return pointX >= x && pointX <= x + width && pointY >= y && pointY <= y + height;
     }
 
-    public int getDepth() {
-        return depth;
+    public boolean inSide(Figure figure, int x, int y, int width, int height) {
+        return figure.x >= x && figure.y >= y && figure.x + figure.width <= x + width && figure.y + figure.height <= y + height;
     }
 
-    public void setDepth(int i) {
-        depth = i;
+    public void fillPort(Port figureStartPort, Figure figure) {
+        figureStartPort.setConnectedFigure(figure);
+        System.out.println(figureStartPort + " is connected to " + figure.getFigureName());
     }
 
     /* UseCase E.1 Move objects */
@@ -103,8 +67,25 @@ public abstract class Figure {
         }
     }
 
-    public boolean inSide(Figure figure, int x, int y, int width, int height) {
-        return figure.x >= x && figure.y >= y && figure.x + figure.width <= x + width && figure.y + figure.height <= y + height;
+    // Getters
+    public Figure getParent() {
+        return parent;
+    }
+
+    public String getFigureName() {
+        return figureName;
+    }
+
+    public ArrayList<Line> getConnectedLines() {
+        return connectedLines;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public int getX() {
@@ -115,12 +96,8 @@ public abstract class Figure {
         return y;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public int getDepth() {
+        return depth;
     }
 
     public Port getAvailableStartPort(Figure figure) {
@@ -167,13 +144,23 @@ public abstract class Figure {
         return null;
     }
 
-    public void fillPort(Port figureStartPort, Figure figure) {
-        figureStartPort.setConnectedFigure(figure);
-        System.out.println(figureStartPort + " is connected to " + figure.getFigureName());
+    public Port getTopPort() { return topPort; }
+    public Port getRightPort() { return rightPort; }
+    public Port getBottomPort() { return bottomPort; }
+    public Port getLeftPort() { return leftPort; }
+
+    // Setters
+    public void setParent(Figure parent) {
+        this.parent = parent;
     }
 
-    // Add getters and setters for x, y, width, height here...
-    // Add methods for handling ports here...
+    public void setFigureName(String figureName) {
+        this.figureName = figureName;
+    }
+
+    public void addConnectedLine(Line line) {
+        connectedLines.add(line);
+    }
 
     public void setWidth(int width) {
         this.width = width;
@@ -191,34 +178,39 @@ public abstract class Figure {
         this.y = y;
     }
 
-
-    public void addConnectedLine(Line line) {
-        connectedLines.add(line);
+    public void setDepth(int i) {
+        depth = i;
     }
 
-    public ArrayList<Line> getConnectedLines() {
-        return connectedLines;
+    public void updatePorts(int x, int y, int width, int height) {
+        topPort.setX(x + width / 2);
+        topPort.setY(y);
+        rightPort.setX(x + width);
+        rightPort.setY(y + height / 2);
+        bottomPort.setX(x + width / 2);
+        bottomPort.setY(y + height);
+        leftPort.setX(x);
+        leftPort.setY(y + height / 2);
     }
 
-    public void setFigureName(String figureName) {
-        this.figureName = figureName;
+    public void setPortVisibility(boolean visible) {
+        topPort.setVisible(visible);
+        rightPort.setVisible(visible);
+        bottomPort.setVisible(visible);
+        leftPort.setVisible(visible);
     }
 
-    public String getFigureName() {
-        return figureName;
-    }
 
-    public Figure getParent() {
-        return parent;
-    }
-    
-    public void setParent(Figure parent) {
-        this.parent = parent;
-    }
 
-    public boolean intersectsLine(int x2, int y2, int midX, int midY) {
-        return x2 >= x && x2 <= x + width && y2 >= y && y2 <= y + height;
-    }
+    // public Port getDraggedPort() {
+    //     return draggedPort;
+    // }
+
+    // public void setDraggedPort(Port draggedPort) {
+    //     this.draggedPort = draggedPort;
+    // }
+
+    // public abstract void resizeBasedOn(Port port);
 }
 
 

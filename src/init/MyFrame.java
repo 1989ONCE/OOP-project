@@ -1,12 +1,11 @@
 package init;
-import java.awt.BorderLayout;
 
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import canvas.MyCanvas;
 import menu.Menu;
 import toolbar.MyToolbar;
-
 
 public class MyFrame extends JFrame{
 
@@ -56,7 +55,7 @@ public class MyFrame extends JFrame{
     }
 
 
-    // set functions
+    // Setters
     public void setFrame(MyFrame frame){
         MyFrame.frame = frame;
     }
@@ -69,7 +68,7 @@ public class MyFrame extends JFrame{
         this.canvas = canvas;
     }
 
-    // get functions
+    // Getters
     public int getFrameWidth() {
         return frameWidth;
     }

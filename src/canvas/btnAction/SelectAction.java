@@ -14,24 +14,19 @@ import init.MyFrame;
 public class SelectAction extends MouseAdapter implements ButtonAction {
     private Figure selectedFigure;
     private Point startPoint;
-    private Point lastmousePosition;
+    private Point lastMousePosition;
     private Figure tempGroupFigure;
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        /** UseCase C.1 Select/Unselect a single objects 
-         * 
-         * Alternative 1.a 使用者點選的座標，不在任何基本物件內
-         * Alternative 2.a 若有其他物件處於被 select 的狀態，取消它們被 select 的狀態。
-         * 
-         ** UseCase C.2 Select/Unselect a group of objects
-         * 
-         * Alternative 4.a (x1,y1,x2,y2) 形成一個四方形的區域。在該區域內的沒有 基本物件完全落於此四方形區域。則本情境等於 unselect 所有之前處於被 select 的狀態。
-         */        
+    public void mousePressed(MouseEvent e) {       
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         ArrayList<Figure> figures = canvas.getFigures();
         this.startPoint = e.getPoint();
         System.out.println(canvas.getSelectedFigure());
+        /** UseCase C.2 Select/Unselect a group of objects
+         * 
+         * Alternative 4.a (x1,y1,x2,y2) 形成一個四方形的區域。在該區域內的沒有 基本物件完全落於此四方形區域。則本情境等於 unselect 所有之前處於被 select 的狀態。
+         **/ 
         // if startPoint is in the tempGroupFigure, select the tempGroupFigure
         if (canvas.getTempFigure() != null && canvas.getTempFigure().contains(startPoint.x, startPoint.y)) {
             System.out.println("select action first if: " + canvas.getSelectedFigure());
@@ -42,6 +37,13 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
             return;
         }
 
+        /** UseCase C.1 Select/Unselect a single objects 
+         * 
+         * Alternative 1.a 使用者點選的座標，不在任何基本物件內
+         * Alternative 2.a 若有其他物件處於被 select 的狀態，取消它們被 select 的狀態。
+         * 
+         **/
+        // if startPoint isn't in the tempGroupFigure, select one figure that contains the startPoint
         // Iterate backwards to start from the top figure
         for (int i = figures.size() - 1; i >= 0; i--) {
             Figure figure = figures.get(i);
@@ -55,26 +57,28 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
                 return;
             }
         }
+
+        // if startPoint isn't in any figure, clear all selected figures
         System.out.println("select action third section: " + canvas.getSelectedFigure());
 
         canvas.clearAllSelected();
         selectedFigure = null;
         tempGroupFigure = null;
-        canvas.setSelectedFigure(null);
+        canvas.setSelectedFigure(selectedFigure);
         canvas.setTempFigure(tempGroupFigure);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        lastmousePosition = null;
-        // if no figure is selected, create a temp group figure
+        lastMousePosition = null;
+        // after dragging the mouse, tempGroupFigure will be created, meanwhile, selectedFigure will be null
         if(tempGroupFigure != null && selectedFigure == null) {
             MyCanvas canvas = MyFrame.getFrame().getCanvas();
             Point endPoint = e.getPoint();
             int width = endPoint.x - startPoint.x;
             int height = endPoint.y - startPoint.y;
 
-            // Paint the GroupFigure only if there are more than 1 figure(including groupFigure) inside the GroupFigure
+            // Paint the GroupFigure only if there are at least 2 figures(including groupFigure) inside the GroupFigure
             if (((GroupFigure)tempGroupFigure).getInsideFigures().size() > 1) {
                 tempGroupFigure.updatePorts(startPoint.x, startPoint.y, width, height);
                 tempGroupFigure.setFigureName("Group");                
@@ -86,21 +90,12 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
                 }
                 return;
             }
-            else {
-                tempGroupFigure = null;
-                canvas.setTempFigure(null);
-            }
+            
+            // if there is only one or none of them are inside the GroupFigure, clear all selected figures
+            tempGroupFigure = null;
+            canvas.setTempFigure(null);
+
         }
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // Implement the mouseExited method here
     }
 
     @Override
@@ -128,13 +123,13 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
         }
         
         // if a figure is selected, move the figure
-        if (lastmousePosition != null) {
-            int dx = e.getX() - lastmousePosition.x;
-            int dy = e.getY() - lastmousePosition.y;
+        if (lastMousePosition != null) {
+            int dx = e.getX() - lastMousePosition.x;
+            int dy = e.getY() - lastMousePosition.y;
             selectedFigure.move(dx, dy);
         }
         // update the last mouse position
-        lastmousePosition = e.getPoint();
+        lastMousePosition = e.getPoint();
     }
 
     @Override

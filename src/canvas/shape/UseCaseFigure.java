@@ -3,11 +3,13 @@ import java.awt.*;
 
 public class UseCaseFigure extends Figure {
     
-
+    // Constructor
     public UseCaseFigure(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
 
+    // polymorphism
+    @Override
     public void draw(Graphics g) {
         g.setColor(this.figureColor);
         g.drawOval(x, y, width, height);
@@ -25,11 +27,5 @@ public class UseCaseFigure extends Figure {
         rightPort.draw(g);
         bottomPort.draw(g);
         leftPort.draw(g);
-
     }
-
-    // @Override
-    // public void resizeBasedOn(Port port) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'resizeBasedOn'");
-    // }
 }

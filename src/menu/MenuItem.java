@@ -4,16 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.JMenuItem;
 
-import menu.menuAction.CloseWindowAction;
-import menu.menuAction.GroupAction;
-import menu.menuAction.MenuAction;
-import menu.menuAction.OpenNewCanvasAction;
-import menu.menuAction.SaveAsAction;
-import menu.menuAction.UnGroupAction;
-import menu.menuAction.RenameObjectAction;
+import menu.menuAction.*;
 
 public class MenuItem extends JMenuItem implements ActionListener{
     

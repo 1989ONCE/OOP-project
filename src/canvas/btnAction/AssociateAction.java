@@ -32,6 +32,8 @@ public class AssociateAction extends MouseAdapter implements ButtonAction {
         endFigure = null;
         figureStartPort = null;
         figureEndPort = null;
+
+        // Iterate backwards to start from the top figure
         for(int i = canvas.getFigures().size() - 1; i >= 0; i--) {
             Figure figure = canvas.getFigures().get(i);
             if(figure.contains(e.getX(), e.getY())) {
@@ -41,6 +43,8 @@ public class AssociateAction extends MouseAdapter implements ButtonAction {
                 break;
             }
         }
+
+        // if startFigure is a group figure, disable the create line action
         if(startFigure instanceof GroupFigure || startFigure == null){
             canvas.clearAllSelected();
             startFigure.setPortVisibility(false);
@@ -53,14 +57,18 @@ public class AssociateAction extends MouseAdapter implements ButtonAction {
         MyCanvas canvas = MyFrame.getFrame().getCanvas();
         Point endPoint = e.getPoint();
 
+        // Iterate backwards to start from the top figure
         for(int i = canvas.getFigures().size() - 1; i >= 0; i--) {
             Figure figure = canvas.getFigures().get(i);
             if(figure.contains(endPoint.x, endPoint.y)) {
                 endFigure = figure;
+                endFigure.setPortVisibility(true);
                 break;
             }
         }
         
+        // if endFigure is a group figure or startFigure and endFigure it's the same figure,
+        // disable the create line action
         if(endFigure instanceof GroupFigure || startFigure == endFigure){
             tempLine = null;
             canvas.setTempLine(null);
@@ -90,16 +98,6 @@ public class AssociateAction extends MouseAdapter implements ButtonAction {
             canvas.addLine(tempLine);
         }
         canvas.setTempLine(null);
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // Implement the mouseEntered method here
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // Implement the mouseExited method here
     }
 
     @Override

@@ -7,9 +7,9 @@ import init.MyFrame;
 public class SaveAsAction implements MenuAction {
     @Override
     public void execute() {
-        MyFrame frame = MyFrame.getFrame();
-        MyCanvas canvas = frame.getCanvas();
+        MyCanvas canvas = MyFrame.getFrame().getCanvas();
         try {
+            // call saveCanvas for user to save the current canvas as .png file
             canvas.saveCanvas(canvas);
         } catch (IOException e) {
             e.printStackTrace();
