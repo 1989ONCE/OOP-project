@@ -30,6 +30,9 @@ import canvas.line.Line;
 import canvas.shape.Figure;
 
 public class MyCanvas extends JPanel {
+    private final String canvasName = "Canvas";
+    private final int canvasNameStartX = 10;
+    private final int canvasNameStartY = 25;
     private Figure selectedFigure;
     private ButtonAction action;
     private ArrayList<Figure> figures = new ArrayList<>();
@@ -221,7 +224,10 @@ public class MyCanvas extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        // draw canvas name
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawString(canvasName, canvasNameStartX, canvasNameStartY);
+        
         // draw all figures, polymorphism
         for (Figure figure : figures) {
             figure.draw(g);
