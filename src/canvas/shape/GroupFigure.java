@@ -3,6 +3,7 @@ package canvas.shape;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.util.ArrayList;
 import canvas.btnAction.GroupInterface;
 
@@ -22,15 +23,20 @@ public class GroupFigure extends Figure implements GroupInterface {
         Graphics2D g = (Graphics2D) g_;
         g.setColor(this.figureColor);
 
+
+        // Save the original stroke
+        Stroke originalStroke = g.getStroke();
+
         // Draw a dashed rectangle
         g.setStroke(dashed);
         g.drawRect(x, y, width, height);
-
+        
         // Draw ports
         topPort.draw(g);
         rightPort.draw(g);
         bottomPort.draw(g);
         leftPort.draw(g);
+        g.setStroke(originalStroke);
     }
 
     @Override
