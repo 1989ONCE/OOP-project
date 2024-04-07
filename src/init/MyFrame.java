@@ -11,9 +11,6 @@ public class MyFrame extends JFrame{
 
     // static variable and method
     private static MyFrame frame;
-    public static MyFrame getFrame(){
-        return frame;
-    }
 
     // set final to prevent from being changed
     private final String title = "UML Editor by Susan Chen";
@@ -64,17 +61,7 @@ public class MyFrame extends JFrame{
         this.toolBar = toolBar;
     }
 
-    public void setCanvas(MyCanvas canvas){
-        this.canvas = canvas;
-    }
-
     // Getters
-    public int getFrameWidth() {
-        return frameWidth;
-    }
-    public int getFrameHeight() {
-        return frameHeight;
-    }
 
     public MyToolbar getToolBar(){
         return this.toolBar;
@@ -83,7 +70,8 @@ public class MyFrame extends JFrame{
     public MyCanvas getCanvas(){
         return this.canvas;
     }
-    public Menu getMenu(){
-        return this.menuBar;
+    
+    public static MyFrame getFrame(){
+        return frame;
     }
 }
