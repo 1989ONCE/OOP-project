@@ -101,17 +101,26 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
             MyCanvas canvas = MyFrame.getFrame().getCanvas();
             canvas.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Point endPoint = e.getPoint();
-            int width = endPoint.x - startPoint.x;
-            int height = endPoint.y - startPoint.y;
+            int width = Math.abs(endPoint.x - startPoint.x);
+            int height = Math.abs(endPoint.y - startPoint.y);
             // Create a temporary group figure to show the process of creating a group figure
-            tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height);
+            if (endPoint.x < startPoint.x) {
+                tempGroupFigure = new GroupFigure(endPoint.x, endPoint.y, width, height);
+            }
+            else{
+                tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height);
+            }
+            // tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height);
             canvas.setTempFigure(tempGroupFigure);
 
             // Check if the figures are inside the tempGroupFigure
             ArrayList<Figure> allFigures = canvas.getFigures();
             for (Figure figure : allFigures) {
                 if(figure.getParent() != null) continue; // Skip the figure that is already in a group
-                else if (figure.inSide(figure, startPoint.x, startPoint.y, width, height)) {
+                else if (endPoint.x > startPoint.x && figure.inSide(figure, startPoint.x, startPoint.y, width, height)) {
+                    ((GroupFigure)tempGroupFigure).addFigureToList(figure);
+                }
+                else if (endPoint.x < startPoint.x && figure.inSide(figure, endPoint.x, endPoint.y, width, height)) {
                     ((GroupFigure)tempGroupFigure).addFigureToList(figure);
                 }
             }
