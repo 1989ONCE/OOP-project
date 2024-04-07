@@ -140,6 +140,8 @@ public class MyCanvas extends JPanel {
     public void clearFigures() {
         figures.clear();
         lines.clear();
+        tempFigure = null;
+        tempLine = null;
     }
 
     // setPortVisibility to false for all figures
