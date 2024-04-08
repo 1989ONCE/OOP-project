@@ -17,6 +17,8 @@ Windows: [UMLeditor(for Windows).zip](https://drive.google.com/uc?export=downloa
 (thanks to this [tutorial](https://centerkey.com/mac/java/), it really helps me a lot~)
 
 # Project Introduction
+[UMLeditor's Class Diagram](https://drive.google.com/file/d/1pLTz6Mgs1_PUXbFvbAtuR28nfwVyYMIF/view?usp=sharing)
+
 [Canvas PPT](https://www.canva.com/design/DAGBu9GFLZs/DWc_viJ2ZSE7Ph-LJ8OZjw/view?utm_content=DAGBu9GFLZs&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 [Use Case Demo Videos](https://drive.google.com/drive/folders/1SElxxMVZs0fi8iVZ7WNX5i9h1zRFODqI?usp=drive_link)
