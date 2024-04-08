@@ -1,7 +1,8 @@
 # OOP-project
 An UML editor based on the concept of object-oriented programming.
 
-![uml](https://github.com/1989ONCE/OOP-project/assets/92381825/1c279c01-0e89-493c-9f99-262a9feed43b)
+![uml](https://github.com/1989ONCE/OOP-project/assets/92381825/83aabb31-ef21-4eaf-b141-65c65cbb34b5)
+
 
 
 # App Installer:
