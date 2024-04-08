@@ -10,7 +10,7 @@ Users can download my Java App with these installer, and run it on your own comp
 
 MacOS: [UMLeditor-1.0.pkg.zip](https://drive.google.com/uc?export=download&id=1AZZnhmmU1qI3YFeHj3xBx7E31b292cIH)
 
-Windows:
+Windows:[UMLeditor(for Windows).exe.zip](https://drive.google.com/uc?export=download&id=1Ezc-5hC67W0oOvrK3DW8eWunHfP6Belq)
 
 (thanks to this [tutorial](https://centerkey.com/mac/java/), it really helps me a lot~)
 
