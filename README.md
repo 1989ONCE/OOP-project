@@ -7,7 +7,7 @@ An UML editor based on the concept of object-oriented programming.
 # App Installer:
 Users can download my Java App with these installer, and run it on your own computer!
 
-MacOS: 
+MacOS: [UMLeditor-1.0.pkg.zip](https://drive.google.com/uc?export=download&id=1AZZnhmmU1qI3YFeHj3xBx7E31b292cIH)
 
 Windows:
 
