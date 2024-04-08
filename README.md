@@ -1,23 +1,24 @@
 # OOP-project
 An UML editor based on the concept of object-oriented programming.
 
+![uml](https://github.com/1989ONCE/OOP-project/assets/92381825/1c279c01-0e89-493c-9f99-262a9feed43b)
 
-## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# App Installer:
+Users can download my Java App with these installer, and run it on your own computer!
 
-## Folder Structure
+MacOS: 
 
-The workspace contains two folders by default, where:
+Windows:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+(thanks to this [tutorial](https://centerkey.com/mac/java/), it really helps me a lot~)
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+# Project Introduction
+[Canvas PPT](https://www.canva.com/design/DAGBu9GFLZs/DWc_viJ2ZSE7Ph-LJ8OZjw/view?utm_content=DAGBu9GFLZs&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+[Use Case Demo Videos](https://drive.google.com/drive/folders/1SElxxMVZs0fi8iVZ7WNX5i9h1zRFODqI?usp=drive_link)
 
-## Dependency Management
+## Folder Structure(Dependency Management)
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
 
