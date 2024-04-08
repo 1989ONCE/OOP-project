@@ -8,13 +8,15 @@ An UML editor based on the concept of object-oriented programming.
 # App Installer:
 Users can download my Java App with these installer, and run it on your own computer!
 
-(Because I didn't use an developer ID, so if your OS said “This file cannot be opened because it is from an unidentified developer.", don't forget to approve it manually in your PC's Settings in any chance)
+(Because I didn't use an developer ID, so if your OS said “This file cannot be opened because it is from an unidentified developer.", don't forget to approve it manually in your PC's Settings, by any chance)
 
 MacOS: [UMLeditor-1.0.pkg.zip](https://drive.google.com/uc?export=download&id=1AZZnhmmU1qI3YFeHj3xBx7E31b292cIH)
 
 Windows: [UMLeditor(for Windows).zip](https://drive.google.com/uc?export=download&id=1Ezc-5hC67W0oOvrK3DW8eWunHfP6Belq)
 
 (thanks to this [tutorial](https://centerkey.com/mac/java/), it really helps me a lot~)
+
+if you want to open in .jar file, you can also download it [here](https://drive.google.com/uc?export=download&id=1B3HS5NHT2DEl-PN3i1ZN3tEhwkT1Vtxc)
 
 # Project Introduction
 [UMLeditor's Class Diagram](https://drive.google.com/file/d/1pLTz6Mgs1_PUXbFvbAtuR28nfwVyYMIF/view?usp=sharing)
