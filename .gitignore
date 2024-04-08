@@ -28,3 +28,7 @@ bin/
 
 #.DS_Store (Mac)
 .DS_Store
+
+# icns for pkg
+*.icns
+non-codeFile
