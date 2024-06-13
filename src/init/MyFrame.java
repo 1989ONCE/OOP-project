@@ -15,7 +15,7 @@ public class MyFrame extends JFrame{
     // set final to prevent from being changed
     private final String title = "UML Editor by Susan Chen";
     private final int frameWidth = 800;
-    private final int frameHeight = 680;
+    private final int frameHeight = 700;
 
     private MyCanvas canvas;
     private Menu menuBar;

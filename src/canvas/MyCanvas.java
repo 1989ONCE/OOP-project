@@ -43,6 +43,7 @@ public class MyCanvas extends JPanel {
         functions.put("Association Line", new CreateLineAction("Association"));
         functions.put("Generalization Line", new CreateLineAction("Generalization"));
         functions.put("Composition Line", new CreateLineAction("Composition"));
+        functions.put("Dependency Line", new CreateLineAction("Dependency"));
         functions.put("Create Class", new CreateFigureAction("Class"));
         functions.put("Create Use Case", new CreateFigureAction("UseCase"));
     }

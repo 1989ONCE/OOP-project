@@ -21,6 +21,7 @@ public class MyToolbar extends JToolBar {
         btnOption.add("Association Line");
         btnOption.add("Generalization Line");
         btnOption.add("Composition Line");
+        btnOption.add("Dependency Line");
         btnOption.add("Create Class");
         btnOption.add("Create Use Case");
     }
@@ -30,6 +31,7 @@ public class MyToolbar extends JToolBar {
         btnUnselectedImg.add("btnImg/assoLine.png");
         btnUnselectedImg.add("btnImg/general.png");
         btnUnselectedImg.add("btnImg/compo.png");
+        btnUnselectedImg.add("btnImg/dependency.png");
         btnUnselectedImg.add("btnImg/class.png");
         btnUnselectedImg.add("btnImg/usecase.png");
     }
@@ -40,6 +42,7 @@ public class MyToolbar extends JToolBar {
         btnSelectedImg.add("btnImg/assoLine_antiwhite.png");
         btnSelectedImg.add("btnImg/general_antiwhite.png");
         btnSelectedImg.add("btnImg/compo_antiwhite.png");
+        btnSelectedImg.add("btnImg/dependency_antiwhite.png");
         btnSelectedImg.add("btnImg/class_antiwhite.png");
         btnSelectedImg.add("btnImg/usecase_antiwhite.png");
     }

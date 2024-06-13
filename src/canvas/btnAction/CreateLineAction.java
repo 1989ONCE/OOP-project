@@ -12,6 +12,7 @@ import canvas.MyCanvas;
 import canvas.line.AssociateLine;
 import canvas.line.CompositionLine;
 import canvas.line.GeneralizationLine;
+import canvas.line.DependencyLine;
 import canvas.line.Line;
 import canvas.shape.GroupFigure;
 import canvas.shape.Figure;
@@ -35,6 +36,7 @@ public class CreateLineAction extends MouseAdapter implements ButtonAction {
         lineCreators.put("Association", (startPointX, startPointY) -> new AssociateLine(startPointX, startPointY));
         lineCreators.put("Generalization", (startPointX, startPointY) -> new GeneralizationLine(startPointX, startPointY));
         lineCreators.put("Composition", (startPointX, startPointY) -> new CompositionLine(startPointX, startPointY));
+        lineCreators.put("Dependency", (startPointX, startPointY) -> new DependencyLine(startPointX, startPointY));
     }
 
     // Constructor
