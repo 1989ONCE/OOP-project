@@ -46,6 +46,7 @@ OOP-project
    │  │  ├─ AssociateLine.java
    │  │  ├─ CompositionLine.java
    │  │  ├─ GeneralizationLine.java
+   │  │  ├─ DependencyLine.java
    │  │  └─ Line.java
    │  └─ shape
    │     ├─ ClassFigure.java
@@ -77,6 +78,8 @@ OOP-project
          ├─ class_antiwhite.png
          ├─ compo.png
          ├─ compo_antiwhite.png
+         ├─ dependency.png
+         ├─ dependency_antiwhite.png
          ├─ general.png
          ├─ general_antiwhite.png
          ├─ select.png
