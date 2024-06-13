@@ -4,9 +4,8 @@ import java.awt.*;
 public class UseCaseFigure extends Figure {
     
     // Constructor
-    public UseCaseFigure(int x, int y, int width, int height) {
-        super(x, y, width, height);
-        this.figureName = "UseCase";
+    public UseCaseFigure(int x, int y, int width, int height, String figureName) {
+        super(x, y, width, height, figureName);
     }
 
     // polymorphism

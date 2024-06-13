@@ -4,9 +4,8 @@ import java.awt.*;
 public class ClassFigure extends Figure {
 
     // Constructor
-    public ClassFigure(int x, int y, int width, int height) {
-        super(x, y, width, height);
-        this.figureName = "Class";
+    public ClassFigure(int x, int y, int width, int height, String figureName) {
+        super(x, y, width, height, figureName);
     }
 
     // polymorphism

@@ -105,12 +105,11 @@ public class SelectAction extends MouseAdapter implements ButtonAction {
             int height = Math.abs(endPoint.y - startPoint.y);
             // Create a temporary group figure to show the process of creating a group figure
             if (endPoint.x < startPoint.x) {
-                tempGroupFigure = new GroupFigure(endPoint.x, endPoint.y, width, height);
+                tempGroupFigure = new GroupFigure(endPoint.x, endPoint.y, width, height, "Group");
             }
             else{
-                tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height);
+                tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height, "Group");
             }
-            // tempGroupFigure = new GroupFigure(startPoint.x, startPoint.y, width, height);
             canvas.setTempFigure(tempGroupFigure);
 
             // Check if the figures are inside the tempGroupFigure

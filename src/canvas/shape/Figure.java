@@ -17,7 +17,7 @@ public abstract class Figure {
     private ArrayList<Line> connectedLines = new ArrayList<>();
 
     // Constructor
-    public Figure(int x, int y, int width, int height) {
+    public Figure(int x, int y, int width, int height, String figureName) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -26,6 +26,7 @@ public abstract class Figure {
         this.rightPort = new Port(0, 0);
         this.leftPort = new Port(0, 0);
         this.bottomPort = new Port(0, 0);
+        this.figureName = figureName;
         updatePorts(x, y, width, height);
     }
 
@@ -184,18 +185,6 @@ public abstract class Figure {
         bottomPort.setVisible(visible);
         leftPort.setVisible(visible);
     }
-
-
-
-    // public Port getDraggedPort() {
-    //     return draggedPort;
-    // }
-
-    // public void setDraggedPort(Port draggedPort) {
-    //     this.draggedPort = draggedPort;
-    // }
-
-    // public abstract void resizeBasedOn(Port port);
 }
 
 

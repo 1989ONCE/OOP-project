@@ -15,8 +15,8 @@ public class GroupFigure extends Figure {
     private ArrayList<Figure> compositeFigures = new ArrayList<>();
     
     // Constructor
-    public GroupFigure(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public GroupFigure(int x, int y, int width, int height, String figureName) {
+        super(x, y, width, height, figureName);
     }
 
     // polymorphism
@@ -32,6 +32,12 @@ public class GroupFigure extends Figure {
         g.setStroke(dashed);
         g.drawRect(x, y, width, height);
         
+        // Calculate the x-coordinate for the string
+        int midX = x + 5;
+        int midY = y - 5;
+
+        g.drawString(this.figureName, midX, midY);
+
         // Draw ports
         topPort.draw(g);
         rightPort.draw(g);

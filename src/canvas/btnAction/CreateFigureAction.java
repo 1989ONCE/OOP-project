@@ -25,8 +25,8 @@ public class CreateFigureAction extends MouseAdapter implements ButtonAction {
     private String figureType;
     private Map<String, BiFunction<Point, Point, Figure>> figureCreators = new HashMap<>();
     {
-        figureCreators.put("UseCase", (startPoint, endPoint) -> new UseCaseFigure(startPoint.x, startPoint.y, Math.abs(endPoint.x - startPoint.x), Math.abs(endPoint.y - startPoint.y)));
-        figureCreators.put("Class", (startPoint, endPoint) -> new ClassFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y));
+        figureCreators.put("UseCase", (startPoint, endPoint) -> new UseCaseFigure(startPoint.x, startPoint.y, Math.abs(endPoint.x - startPoint.x), Math.abs(endPoint.y - startPoint.y), "UseCase"));
+        figureCreators.put("Class", (startPoint, endPoint) -> new ClassFigure(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y, "Class"));
     }
 
     // Constructor
